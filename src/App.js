@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from "react"
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import Dashboard from "./components/screens/Dashboard";
+import Dashboard from "./components/screens/Dashboard"
 import LoginScreen from "./components/screens/LoginScreen";
 import LoginContext from "./contexts/login/loginContext";
 import Home from './components/screens/Home';

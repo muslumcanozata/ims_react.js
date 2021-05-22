@@ -12,6 +12,18 @@ const LoginState = (props) => {
     const [state, dispatch] = useReducer(LoginReducer, initialState);
 
 	const didMount = () => {
+		if(localStorage.getItem('token')){
+			dispatch({
+				type: "SET_ISLOGIN",
+				payload: true,
+			})
+		}
+		else{
+			dispatch({
+				type: "SET_ISLOGIN",
+				payload: false,
+			})
+		}
 		if(state.isLogin){
 			fetch('http://localhost:8000/api/current_user/', {
 				method : 'GET',
@@ -49,8 +61,7 @@ const LoginState = (props) => {
 			dispatch({
 				type: "SET_ISLOGIN",
 				payload: true
-			}
-			)
+			})
 		  });
 	};
 
@@ -81,7 +92,7 @@ const LoginState = (props) => {
 		})
 	}
 
-	return <LoginContext.Provider
+	return (<LoginContext.Provider
 		value={{
 			username: state.username,
 			password: state.password,
@@ -92,7 +103,7 @@ const LoginState = (props) => {
 			didMount
 		}}>
 			{props.children}
-		</LoginContext.Provider>
+		</LoginContext.Provider>);
 }
 
 export default LoginState;

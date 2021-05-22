@@ -3,16 +3,15 @@ import { Redirect } from "react-router-dom";
 import LoginContext from '../../contexts/login/loginContext';
 
 const Home = () => {
+  	const { isLogin, didMount } = useContext(LoginContext)
 
-  const { didMount } = useContext(LoginContext)
+	useEffect(( ) => {
+		didMount()
+	}, [])
 
-  useEffect(() => {
-    didMount();
-  }, []);
-
-  return localStorage.getItem('token') ? (
-    <Redirect to="/dashboard" />) :
-    (<Redirect to="/login" />)
+  	return ((isLogin) ? (
+    	<Redirect to="/dashboard" />) :
+    	(<Redirect to="/login" />))
 };
 
 export default Home
