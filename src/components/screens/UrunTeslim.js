@@ -120,8 +120,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const Dashboard = () => {
-  	const { handleLogout, didMount, isLogin, phone } = useContext(LoginContext)
+const UrunTeslim = () => {
+    const { handleLogout, didMount, isLogin } = useContext(LoginContext)
 
 	const classes = useStyles();
 	const [open, setOpen] = useState(false);
@@ -137,7 +137,8 @@ const Dashboard = () => {
 		didMount();
 	}, [])
 
-  	return ((isLogin)
+
+    return ((isLogin)
 	  	? 
 		(<div className={classes.root}>
 			<CssBaseline />
@@ -204,6 +205,12 @@ const Dashboard = () => {
 								<Orders />
 							</Paper>
 						</Grid>
+                        {/* Recent Orders */}
+						<Grid item xs={12}>
+							<Paper className={classes.paper}>
+								<Orders />
+							</Paper>
+						</Grid>
 					</Grid>
 					<Box pt={4}>
 						<Copyright />
@@ -217,6 +224,6 @@ const Dashboard = () => {
 		: 
     	(<Redirect to="/login"/>)
 	);
-};
+}
 
-export default Dashboard;
+export default UrunTeslim

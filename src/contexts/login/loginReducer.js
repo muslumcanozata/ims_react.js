@@ -15,6 +15,15 @@ const LoginReducer = (state, action) => {
                 ...state,
                 isLogin: action.payload
             }
+        case "SET_OTHERS":
+            return {
+                ...state,
+                isno: action.payload.isno,
+                email: action.payload.email,
+                first_name: action.payload.isim,
+                last_name: action.payload.soyisim,
+                phone: action.payload.tel,
+            }
         default:
             return state
     }

@@ -1,12 +1,17 @@
 import { useReducer } from "react";
 import LoginReducer from './loginReducer';
 import LoginContext from './loginContext';
+import axios from "axios";
 
 const LoginState = (props) => {
     const initialState = {
         username: '',
         password: '',
-        isLogin: false
+		firstName: '',
+		lastName: '',
+		email: '',
+		phone: '',
+		isLogin: false
     }
 
     const [state, dispatch] = useReducer(LoginReducer, initialState);
@@ -40,29 +45,49 @@ const LoginState = (props) => {
 			})
 			.catch(err => console.log(err));
 		}
+		if(state.isLogin){
+			axios
+				.get(`http://localhost:8000/api/sarfKullanicilar/${state.username}?format=json`)
+				.then(res => {
+					dispatch({
+						type: "SET_OTHERS",
+						payload: res.data
+					})
+				})
+		}
 	}
 
 	const handleLogin = (e, data) => {
 		e.preventDefault();
 		fetch('http://localhost:8000/token-auth/', {
-		  method: 'POST',
-		  headers: {
-			'Content-Type': 'application/json'
-		  },
-		  body: JSON.stringify(data)
-		})
-		  .then(res => res.json())
-		  .then(json => {
-			localStorage.setItem('token', json.token);
-			dispatch({
-				type: "SET_USERNAME",
-				payload: json.user.username
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(data)
+			}
+		)
+			.then(res => res.json())
+			.then(json => {
+				localStorage.setItem('token', json.token);
+				dispatch({
+					type: "SET_USERNAME",
+					payload: json.user.username
+				})
+				dispatch({
+					type: "SET_ISLOGIN",
+					payload: true
+				})
+		  	}
+		);
+		axios
+			.get(`http://localhost:8000/api/sarfKullanicilar/${state.username}?format=json`)
+			.then(res => {
+				dispatch({
+					type: "SET_OTHERS",
+					payload: res.data
+				})
 			})
-			dispatch({
-				type: "SET_ISLOGIN",
-				payload: true
-			})
-		  });
 	};
 
 	const handleLoginChange = event => {
@@ -90,6 +115,16 @@ const LoginState = (props) => {
 			type: "SET_USERNAME",
 			payload: ''
 		})
+		dispatch({
+			type: "SET_OTHERS",
+			payload: {
+				isno: '',
+                email: '',
+                first_name: '',
+                last_name: '',
+                phone: '',
+			}
+		})
 	}
 
 	return (<LoginContext.Provider
@@ -97,6 +132,10 @@ const LoginState = (props) => {
 			username: state.username,
 			password: state.password,
 			isLogin: state.isLogin,
+			firstName: state.firstName,
+			lastName: state.lastName,
+			email: state.email,
+			phone: state.phone,
 			handleLogin,
 			handleLoginChange,
 			handleLogout,
