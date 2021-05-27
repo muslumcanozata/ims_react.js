@@ -61,7 +61,7 @@ const LoginScreen = () => {
 	const { username, password, handleLogin, handleLoginChange, isLogin } = useContext(LoginContext);
 
 	if (isLogin) {
-		return <Redirect to="/dashboard" />;
+		return <Redirect to="/anasayfa" />;
 	}
 
 	return (

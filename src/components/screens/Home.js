@@ -10,8 +10,8 @@ const Home = () => {
 	}, [])
 
   	return ((isLogin) ? (
-    	<Redirect to="/dashboard" />) :
-    	(<Redirect to="/login" />))
+    	<Redirect to="/anasayfa" />) :
+    	(<Redirect to="/giris" />))
 };
 
 export default Home

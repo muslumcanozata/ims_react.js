@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom';
 
 export const mainListItems = (
   <div>
-    <ListItem button component={Link} to="/dashboard">
+    <ListItem button component={Link} to="/anasayfa">
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
@@ -21,7 +21,7 @@ export const mainListItems = (
     </ListItem>
     <ListItem button component={Link} to="/urunteslim" >
       <ListItemIcon>
-        <i class="fas fa-truck-loading"></i>
+        <i class="fas fa-truck-loading fa-lg"></i>
       </ListItemIcon>
       <ListItemText primary="Ürün Teslim" />
     </ListItem>
