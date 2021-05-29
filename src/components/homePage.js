@@ -1,6 +1,4 @@
-import React, { useEffect, useContext, useState } from "react";
-import { Redirect, BrowserRouter, Link } from "react-router-dom";
-import LoginContext from '../contexts/login/loginContext';
+import React from "react";
 import Copyright from "./Copyright";
 // MaterialUI
 import clsx from 'clsx';

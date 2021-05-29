@@ -20,6 +20,17 @@ const LoginReducer = (state, action) => {
                 ...state,
                 isIdentificate: action.payload
             }
+        case "RFOUT":
+            return {
+                isno: '',
+                email: '',
+                isim: '',
+                soyisim: '',
+                tel: '',
+                rfid: '',
+                grup: '',
+                isIdentificate: ''
+            }
         default:
             return state
     }

@@ -3,7 +3,7 @@ import RFIDReducer from './rfidReducer';
 import RFIDContext from './rfidContext';
 import axios from "axios";
 
-const LoginState = (props) => {
+const RFIDState = (props) => {
     const initialState = {
         isno: '',
         email: '',
@@ -15,85 +15,36 @@ const LoginState = (props) => {
 		isIdentificate: false,
     }
 
-    const [state, dispatch] = useReducer(LoginReducer, initialState);
-
-	const didMount = () => {
-		if(localStorage.getItem('token')){
-			dispatch({
-				type: "SET_ISLOGIN",
-				payload: true,
-			})
-		}
-		else{
-			dispatch({
-				type: "SET_ISLOGIN",
-				payload: false,
-			})
-		}
-		if(state.isLogin){
-			fetch('http://localhost:8000/api/current_user/', {
-				method : 'GET',
-				headers : {
-					Authorization : `JWT ${localStorage.getItem('token')}`
-				}
-			})
-			.then(res => res.json())
-			.then(json => {
-				dispatch({
-					type: "SET_USERNAME",
-					payload: json.username
-				})
-			})
-			.catch(err => console.log(err));
-		}
-		if(state.isLogin){
-			axios
-				.get(`http://localhost:8000/api/sarfKullanicilar/${state.username}?format=json`)
-				.then(res => {
-					dispatch({
-						type: "SET_OTHERS",
-						payload: res.data
-					})
-				})
-		}
-	}
+    const [state, dispatch] = useReducer(RFIDReducer, initialState);
 
 	const handleRFin = (e, data) => {
 		e.preventDefault();
 
 		axios
-			.get(`http://localhost:8000/api/sarfKullanicilar/${state.rfid}?format=json`)
+			.get(`http://localhost:8000/api/personeller/${state.rfid}?format=json`)
 			.then(res => {
 				dispatch({
 					type: "SET_OTHERS",
 					payload: res.data
 				})
 			})
+		console.log(state.rfid)
 	};
 
-	const handleRFChange = event => {
-		if(event.target.name === 'username'){
-			dispatch({
-				type: "SET_USERNAME",
-				payload: event.target.value
-			})
-		}
-		else if (event.target.name === 'password') {
-			dispatch({
-				type: "SET_PASSWORD",
-				payload: event.target.value
-			})
-		}
+	const handleRFChange = (event) => {
+		dispatch({
+			type: "SET_RFID",
+			payload: event.target.value
+		})
 	}
 
-	const handleRFout = () => {
-		localStorage.removeItem('token');
+	const handleRFOut = () => {
 		dispatch({
-			type: "SET_ISLOGIN",
+			type: "SET_ISIDENTIFICATE",
 			payload: false
 		})
 		dispatch({
-			type: "SET_USERNAME",
+			type: "SET_RFID",
 			payload: ''
 		})
 		dispatch({
@@ -108,22 +59,22 @@ const LoginState = (props) => {
 		})
 	}
 
-	return (<LoginContext.Provider
+	return (<RFIDContext.Provider
 		value={{
-			username: state.username,
-			password: state.password,
-			isLogin: state.isLogin,
-			firstName: state.firstName,
-			lastName: state.lastName,
+			isno: state.isno,
 			email: state.email,
-			phone: state.phone,
-			handleLogin,
-			handleLoginChange,
-			handleLogout,
-			didMount
+			isim: state.isim,
+			soyisim: state.soyisim,
+			tel: state.tel,
+			rfid: state.rfid,
+			grup: state.grup,
+			isIdentificate: state.isIdentificate,
+			handleRFin,
+			handleRFChange,
+			handleRFOut,
 		}}>
 			{props.children}
-		</LoginContext.Provider>);
+		</RFIDContext.Provider>);
 }
 
-export default LoginState;
+export default RFIDState;

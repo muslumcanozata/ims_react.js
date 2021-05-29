@@ -1,7 +1,8 @@
 import React, { useEffect, useContext, useState } from "react";
 import { Redirect, BrowserRouter, Link } from "react-router-dom";
-import LoginContext from '../../contexts/login/loginContext'
-import OpenSelectedContext from '../../contexts/openSelected/openSelectedContext';
+import LoginContext from '../../contexts/login/loginContext';
+import RFIDContext from '../../contexts/rfid/rfidContext';
+import UrunTeslimDetails from '../UrunTeslimDetails';
 import Sidebar from '../Sidebar';
 import Header from '../Header';
 import Tanıma from '../Tanıma';
@@ -108,8 +109,8 @@ const useStyles = makeStyles((theme) => ({
 
 
 const UrunTeslim = () => {
-    const { handleLogout, didMount, isLogin } = useContext(LoginContext)
-	const { open, selected, setSelected, handleDrawerOpen, handleDrawerClose } = useContext(OpenSelectedContext)
+    const { isLogin, didMount } = useContext(LoginContext)
+	const { isIdentificate } = useContext(RFIDContext)
 
 	const classes = useStyles();
 
@@ -125,7 +126,7 @@ const UrunTeslim = () => {
 		(<div className={classes.root}>
 			<Header />
 			<Sidebar />
-			<Tanıma />
+			{(isIdentificate) ? <UrunTeslimDetails /> : <Tanıma />}
     	</div>) 
 		: 
     	(<Redirect to="/giris"/>)
