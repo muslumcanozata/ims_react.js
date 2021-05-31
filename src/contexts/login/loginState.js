@@ -17,18 +17,19 @@ const LoginState = (props) => {
     const [state, dispatch] = useReducer(LoginReducer, initialState);
 
 	const didMount = () => {
-		if(localStorage.getItem('token')){
-			dispatch({
-				type: "SET_ISLOGIN",
-				payload: true,
-			})
-		}
-		else{
-			dispatch({
-				type: "SET_ISLOGIN",
-				payload: false,
-			})
-		}
+		// if(localStorage.getItem('token')){
+		// 	dispatch({
+		// 		type: "SET_ISLOGIN",
+		// 		payload: true,
+		// 	})
+		// 	console.log(state.isLogin)
+		// }
+		// else{
+		// 	dispatch({
+		// 		type: "SET_ISLOGIN",
+		// 		payload: false,
+		// 	})
+		// }
 		if(state.isLogin){
 			fetch('http://localhost:8000/api/current_user/', {
 				method : 'GET',

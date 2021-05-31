@@ -12,52 +12,51 @@ const RFIDState = (props) => {
         tel: '',
         rfid: '',
         grup: '',
-		isIdentificate: false,
-    }
+		isIdentificate: false
+    };
 
     const [state, dispatch] = useReducer(RFIDReducer, initialState);
 
-	const handleRFin = (e, data) => {
-		e.preventDefault();
+	const handleRFin = (event, data) => {
+		event.preventDefault();
 
 		axios
-			.get(`http://localhost:8000/api/personeller/${state.rfid}?format=json`)
+			.get(`http://localhost:8000/api/personeller/${data.rfid}?format=json`)
 			.then(res => {
 				dispatch({
-					type: "SET_OTHERS",
+					type: "GET_PERSONEL",
 					payload: res.data
-				})
-			})
-		console.log(state.rfid)
+				});
+			});
+		dispatch({
+			type: "SET_ISIDENTIFICATE",
+			payload: true
+		})
 	};
 
 	const handleRFChange = (event) => {
 		dispatch({
 			type: "SET_RFID",
 			payload: event.target.value
-		})
-	}
+		});
+	};
 
 	const handleRFOut = () => {
 		dispatch({
-			type: "SET_ISIDENTIFICATE",
-			payload: false
-		})
-		dispatch({
-			type: "SET_RFID",
-			payload: ''
-		})
-		dispatch({
-			type: "SET_OTHERS",
+			type: "RFOUT",
 			payload: {
 				isno: '',
-                email: '',
-                first_name: '',
-                last_name: '',
-                phone: '',
+				email: '',
+				isim: '',
+				soyisim: '',
+				tel: '',
+				rfid: '',
+				grup: '',
+				isIdentificate: false
 			}
-		})
-	}
+		});
+		console.log(state.isno);
+	};
 
 	return (<RFIDContext.Provider
 		value={{
@@ -71,7 +70,7 @@ const RFIDState = (props) => {
 			isIdentificate: state.isIdentificate,
 			handleRFin,
 			handleRFChange,
-			handleRFOut,
+			handleRFOut
 		}}>
 			{props.children}
 		</RFIDContext.Provider>);

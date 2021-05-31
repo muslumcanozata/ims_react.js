@@ -1,4 +1,4 @@
-const LoginReducer = (state, action) => {
+const RFIDReducer = (state, action) => {
     switch(action.type) {
         case "GET_PERSONEL":
             return {
@@ -22,18 +22,18 @@ const LoginReducer = (state, action) => {
             }
         case "RFOUT":
             return {
-                isno: '',
-                email: '',
-                isim: '',
-                soyisim: '',
-                tel: '',
-                rfid: '',
-                grup: '',
-                isIdentificate: ''
+                isno: action.payload.isno,
+                email: action.payload.email,
+                isim: action.payload.isim,
+                soyisim: action.payload.soyisim,
+                tel: action.payload.tel,
+                rfid: action.payload.rfid,
+                grup: action.payload.grup,
+                isIdentificate: action.payload.isIdentificate
             }
         default:
             return state
     }
 }
 
-export default LoginReducer;
+export default RFIDReducer;

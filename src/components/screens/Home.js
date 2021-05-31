@@ -9,8 +9,11 @@ const Home = () => {
 		didMount()
 	}, [])
 
-  	return ((isLogin) ? (
-    	<Redirect to="/anasayfa" />) :
+  	return (
+		(isLogin) 
+	  	? 
+		(<Redirect to="/anasayfa" />) 
+		:
     	(<Redirect to="/giris" />))
 };
 

@@ -1,28 +1,14 @@
-import React, { useEffect, useContext } from "react";
-import { Link, useHistory } from "react-router-dom";
-import LoginContext from '../../contexts/login/loginContext';
+import React, { useContext, useEffect } from 'react'
+import { useHistory, Redirect } from 'react-router-dom';
 import RFIDContext from '../../contexts/rfid/rfidContext';
-import Sidebar from '../Sidebar';
+import UrunTeslimDetails from '../UrunTeslimDetails';
+import LoginContext from '../../contexts/login/loginContext';
+import OpenSelectedContext from '../../contexts/openSelected/openSelectedContext';
 import Header from '../Header';
-import Tanıma from '../Tanıma';
-// MaterialUI
+import Sidebar from '../Sidebar';
+//Material-UI
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-
-function Copyright() {
-    return (
-     	<Typography variant="body2" color="textSecondary" align="center">
-        	{'© '}
-        	<Link color="inherit" href="http://localhost:3000/">
-          		Industrial Material Delivery System
-        	</Link>
-			{' '}
-        	{new Date().getFullYear()}
-        	{'.'}
-      	</Typography>
-    );
-}
 
 const drawerWidth = 240;
 
@@ -105,31 +91,30 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
+const UrunTeslimDetailsPage = ( { match } ) => {
+    const { isIdentificate } = useContext(RFIDContext)
+    const { didMount, isLogin } = useContext(LoginContext)
 
-const UrunTeslim = () => {
-    const { isLogin, didMount } = useContext(LoginContext)
-	const { rfid, isIdentificate } = useContext(RFIDContext)
-
-	const history = useHistory();
+    const history = useHistory();
 	const classes = useStyles();
 
-	const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+	useEffect(() => {
+	}, []);
 
-	useEffect(( ) => {
-	}, [])
-
-
-    return ((isLogin)
-		?
- 		(
+  	return (
+		(isLogin)
+	  	?
+		((isIdentificate) ? 
 			(<div className={classes.root}>
 				<Header />
 				<Sidebar />
-				<Tanıma />
-			</div>))
-  		:
-  		history.push('/giris')
-	);
+                <UrunTeslimDetails/> 
+			</div>)
+            :
+            (history.push("/urunteslim")))
+		:
+    	(<Redirect to="/giris"/>)
+    );
 }
 
-export default UrunTeslim;
+export default UrunTeslimDetailsPage;

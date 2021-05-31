@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import Copyright from "./Copyright";
 import Title from "./Title"
-import { ResponsiveContainer } from 'recharts';
+import RFIDContext from "../contexts/rfid/rfidContext";
 // MaterialUI
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
@@ -15,7 +15,6 @@ import Popover from '@material-ui/core/Popover';
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
 import TextField from '@material-ui/core/TextField';
 import { useTheme } from '@material-ui/core/styles';
-import RFIDContext from "../contexts/rfid/rfidContext";
 
 
 
@@ -43,9 +42,10 @@ const useStyles = makeStyles((theme) => ({
 		display: 'flex',
 		overflow: 'auto',
 		flexDirection: 'column',
+		width: 1500
 	},
 	fixedHeight: {
-		height: 240,
+		height: 500,
 	},
 	tanimaPaper: {
  		height: 120,
@@ -56,15 +56,18 @@ const useStyles = makeStyles((theme) => ({
 const Tanıma = () => {
 	const theme = useTheme();
 	const classes = useStyles();
+	const history = useHistory();
 
 	const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 	const tanimaPaper = clsx(classes.paper, classes.tanimaHeight);
 
 	const { rfid, isIdentificate, handleRFin, handleRFChange } = useContext(RFIDContext)
 
-    return ((isIdentificate) ? 
-		(<Link to={`/urunteslim/${rfid}`} />)
-		:
+	function goNext() {
+		history.push(`/urunteslim/${rfid}`)
+	}
+
+    return (
 		<div className={classes.root}>
 			<main className={classes.content}>
 			  	<div className={classes.appBarSpacer} />
@@ -95,19 +98,19 @@ const Tanıma = () => {
 																}}
 															>
 																<Box p={2}>
-																		<TextField
-																			value={rfid}
-																			autoFocus={true}
-																			hintText='Type your message here'
-																			onChange={handleRFChange}
-																			onKeyUp={(event) => {
-																				if ( event.key === 'Enter'){
-																					handleRFin(event, {
-																						rfid: rfid
-																					})
-																				} 
-																			}}
-																		/>
+																	<TextField
+																		value={rfid}
+																		autoFocus={true}
+																		onChange={handleRFChange}
+																		onKeyUp={(event) => {
+																			if ( event.key === 'Enter'){
+																				handleRFin(event, {
+																					rfid: rfid
+																				})
+																				goNext();
+																			} 
+																		}}
+																	/>
 																</Box>
 															</Popover>
 														</div>

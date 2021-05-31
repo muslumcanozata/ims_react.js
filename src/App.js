@@ -5,11 +5,10 @@ import LoginScreen from "./components/screens/LoginScreen";
 import LoginContext from "./contexts/login/loginContext";
 import Home from './components/screens/Home';
 import UrunTeslim from "./components/screens/UrunTeslim";
-import UrunTeslimDetails from "./components/UrunTeslimDetails.js";
+import UrunTeslimDetailsPage from "./components/screens/UrunTeslimDetailsPage.js";
 
 
 const App = () => {
-
 	const { didMount } = useContext(LoginContext);
 
 	useEffect(( ) => {
@@ -23,10 +22,10 @@ const App = () => {
 				<Route path="/giris" exact component={LoginScreen}></Route>
 				<Route path="/anasayfa" exact component={Dashboard}></Route>
 				<Route path="/urunteslim" exact component={UrunTeslim}></Route>
-				<Route path="/urunteslim/:rfid" exact component={UrunTeslimDetails}></Route>
+				<Route path="/urunteslim/:rfidentification" exact component={UrunTeslimDetailsPage}></Route>
 				</Switch>
 		</BrowserRouter>
 	);
-  };
+};
 
-  export default App;
+export default App;

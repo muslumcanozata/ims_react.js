@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from "react";
-import { Redirect, BrowserRouter, Link, Switch } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import LoginContext from '../../contexts/login/loginContext'
 import OpenSelectedContext from '../../contexts/openSelected/openSelectedContext';
 import HomePage from "../homePage";
@@ -100,7 +100,7 @@ const Dashboard = () => {
 	const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
 	useEffect(( ) => {
-		didMount();
+
 	}, [])
 
   	return ((isLogin)
