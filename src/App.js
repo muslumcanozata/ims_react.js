@@ -22,7 +22,7 @@ const App = () => {
 				<Route path="/giris" exact component={LoginScreen}></Route>
 				<Route path="/anasayfa" exact component={Dashboard}></Route>
 				<Route path="/urunteslim" exact component={UrunTeslim}></Route>
-				<Route path="/urunteslim/:rfidentification" exact component={UrunTeslimDetailsPage}></Route>
+				<Route path="/urunteslimdetay" exact component={UrunTeslimDetailsPage}></Route>
 				</Switch>
 		</BrowserRouter>
 	);

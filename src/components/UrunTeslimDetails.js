@@ -12,6 +12,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import { useTheme } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 
 
 
@@ -58,9 +59,10 @@ const UrunTeslimDetails = () => {
 	const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 	const tanimaPaper = clsx(classes.paper, classes.tanimaHeight);
 
-	const { rfid, isIdentificate, isno, handleRFin, handleRFChange } = useContext(RFIDContext)
+	const { rfid, isno, tel, isIdentificate, handleRFin, handleRFChange, handleOut } = useContext(RFIDContext)
 
 	function goBack() {
+		handleOut();
 		history.push(`/urunteslim/`)
 	}
 
@@ -77,8 +79,18 @@ const UrunTeslimDetails = () => {
 									<Title>Personel Bilgileri</Title>
 										<Grid container spacing={3}>
 											<p>
-                                                rfid: {rfid}, isno: {isno}
+                                                rfid: {rfid}, isno: {isno}, tel: {tel}
                                             </p>
+											<Button onClick={() => {		
+													handleOut();
+													history.push(`/urunteslim/`)}
+												}
+												variant="contained" 
+												color="primary" 
+											>
+												Out
+											</Button>
+											{/* <button onClick={goBack()}>OUT</button> */}
 										</Grid>
 								</React.Fragment>
 							</Grid>

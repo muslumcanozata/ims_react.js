@@ -12,6 +12,7 @@ const RFIDState = (props) => {
         tel: '',
         rfid: '',
         grup: '',
+		qr: '',
 		isIdentificate: false
     };
 
@@ -21,10 +22,27 @@ const RFIDState = (props) => {
 		event.preventDefault();
 
 		axios
-			.get(`http://localhost:8000/api/personeller/${data.rfid}?format=json`)
+			.get(`http://localhost:8000/api/personellerRF/${data.rfid}/?format=json`)
 			.then(res => {
 				dispatch({
-					type: "GET_PERSONEL",
+					type: "GET_PERSONELWRFID",
+					payload: res.data
+				});
+			});
+		dispatch({
+			type: "SET_ISIDENTIFICATE",
+			payload: true
+		})
+	};
+
+	const handleQRin = (event, data) => {
+		event.preventDefault();
+
+		axios
+			.get(`http://localhost:8000/api/personellerQR/${data.tel}/?format=json`)
+			.then(res => {
+				dispatch({
+					type: "GET_PERSONELWQR",
 					payload: res.data
 				});
 			});
@@ -40,10 +58,17 @@ const RFIDState = (props) => {
 			payload: event.target.value
 		});
 	};
-
-	const handleRFOut = () => {
+	
+	const handleQRChange = (event) => {
 		dispatch({
-			type: "RFOUT",
+			type: "SET_QR",
+			payload: event.target.value
+		});
+	};
+
+	const handleOut = () => {
+		dispatch({
+			type: "OUT",
 			payload: {
 				isno: '',
 				email: '',
@@ -52,6 +77,7 @@ const RFIDState = (props) => {
 				tel: '',
 				rfid: '',
 				grup: '',
+				qr: '',
 				isIdentificate: false
 			}
 		});
@@ -69,8 +95,10 @@ const RFIDState = (props) => {
 			grup: state.grup,
 			isIdentificate: state.isIdentificate,
 			handleRFin,
+			handleQRin,
 			handleRFChange,
-			handleRFOut
+			handleQRChange,
+			handleOut
 		}}>
 			{props.children}
 		</RFIDContext.Provider>);

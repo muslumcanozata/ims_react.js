@@ -1,13 +1,24 @@
 const RFIDReducer = (state, action) => {
     switch(action.type) {
-        case "GET_PERSONEL":
+        case "GET_PERSONELWRFID":
             return {
                 ...state,
                 isno: action.payload.isno,
                 email: action.payload.email,
                 isim: action.payload.isim,
                 soyisim: action.payload.soyisim,
-                tel: action.payload.tel,
+                tel: action.payload.tel2,
+                grup: action.payload.grup
+            }
+        case "GET_PERSONELWQR":
+            return {
+                ...state,
+                isno: action.payload.isno,
+                email: action.payload.email,
+                isim: action.payload.isim,
+                soyisim: action.payload.soyisim,
+                rfid: action.payload.rfid,
+                tel: action.payload.tel2,
                 grup: action.payload.grup
             }
         case "SET_RFID":
@@ -15,12 +26,17 @@ const RFIDReducer = (state, action) => {
                 ...state,
                 rfid: action.payload
             }
+        case "SET_QR":
+            return {
+                ...state,
+                qr: action.payload
+            }
         case "SET_ISIDENTIFICATE":
             return {
                 ...state,
                 isIdentificate: action.payload
             }
-        case "RFOUT":
+        case "OUT":
             return {
                 isno: action.payload.isno,
                 email: action.payload.email,

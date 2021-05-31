@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext,useState } from "react";
 import { useHistory } from "react-router-dom";
 import Copyright from "./Copyright";
 import Title from "./Title"
@@ -61,10 +61,24 @@ const Tanıma = () => {
 	const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 	const tanimaPaper = clsx(classes.paper, classes.tanimaHeight);
 
-	const { rfid, isIdentificate, handleRFin, handleRFChange } = useContext(RFIDContext)
+	const { rfid, qr, isIdentificate, handleRFin, handleQRin, handleRFChange, handleQRChange } = useContext(RFIDContext)
 
-	function goNext() {
-		history.push(`/urunteslim/${rfid}`)
+	function goNext(keyword) {
+		history.push(`/urunteslim/${keyword}`)
+	}
+
+	const [QRChange, setQRChange] = useState('')
+
+	function handleRegEx(event, data){
+		var str = data.tel;
+		var result = str.match(/CELL:\s*([^\n\r]*)/g);
+		var ds1 = result[0];
+		var realtel = ds1.slice(5, 16);
+
+		handleQRin(event, {
+			tel: realtel
+		})
+		history.push(`/urunteslimdetay`)
 	}
 
     return (
@@ -99,15 +113,20 @@ const Tanıma = () => {
 															>
 																<Box p={2}>
 																	<TextField
+																		variant="outlined"
+																		margin="normal"
+																		fullWidth
+																		id="rfid"
+																		label="Kartı Okutunuz"
+																		name="rfid"
 																		value={rfid}
-																		autoFocus={true}
 																		onChange={handleRFChange}
 																		onKeyUp={(event) => {
 																			if ( event.key === 'Enter'){
 																				handleRFin(event, {
 																					rfid: rfid
 																				})
-																				goNext();
+																				history.push(`/urunteslimdetay`)
 																			} 
 																		}}
 																	/>
@@ -122,7 +141,7 @@ const Tanıma = () => {
 													{(popupState) => (
 														<div>
 															<Button variant="contained" color="primary" {...bindTrigger(popupState)}>
-																Open PopOver
+																QR KOD İLE TANIMA
 															</Button>
 															<Popover
 																{...bindPopover(popupState)}
@@ -137,14 +156,21 @@ const Tanıma = () => {
 															>
 																<Box p={2}>
 																	<TextField
-																		// value={this.state.message}
-																		// autoFocus={true}
-																		// hintText='Type your message here'
-																		// onChange={this.onChangeMessage}
-																		// onKeyUp={(event) => {
-																		// 	if ( event.key === 'Enter')
-																		// 		this.sendMessage();
-																		// }}
+																		variant="outlined"
+																		margin="normal"
+																		fullWidth
+																		id="qr"
+																		label="QR Kodu Okutunuz"
+																		name="qr"
+																		value={qr}
+																		onChange={setQRChange}
+																		onKeyUp={(event) => {
+																			if ( event.key === 'Enter'){
+																					handleRegEx(event, {
+																						tel: event.target.value
+																					})
+																				}
+																		}}
 																	/>
 																</Box>
 															</Popover>
