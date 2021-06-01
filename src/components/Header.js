@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import LoginContext from '../contexts/login/loginContext'
 import OpenSelectedContext from '../contexts/openSelected/openSelectedContext';
-
+import Logout from './Logout'
 //MaterialUI
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
@@ -124,9 +124,10 @@ const Header = () => {
                             <NotificationsIcon />
                         </Badge>
                     </IconButton>
-                    <IconButton color="inherit">
+					<Logout />
+                    {/* <IconButton color="inherit">
                         <i onClick={handleLogout} class="fas fa-sign-out-alt"></i>
-                    </IconButton>
+                    </IconButton> */}
             </Toolbar>
             </AppBar>
         </div>

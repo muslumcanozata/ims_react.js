@@ -20,8 +20,8 @@ const LoginReducer = (state, action) => {
                 ...state,
                 isno: action.payload.isno,
                 email: action.payload.email,
-                first_name: action.payload.isim,
-                last_name: action.payload.soyisim,
+                firstName: action.payload.isim,
+                lastName: action.payload.soyisim,
                 phone: action.payload.tel,
             }
         default:

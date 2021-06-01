@@ -119,6 +119,7 @@ const Tanıma = () => {
 																		id="rfid"
 																		label="Kartı Okutunuz"
 																		name="rfid"
+																		autoFocus
 																		value={rfid}
 																		onChange={handleRFChange}
 																		onKeyUp={(event) => {
@@ -159,6 +160,7 @@ const Tanıma = () => {
 																		variant="outlined"
 																		margin="normal"
 																		fullWidth
+																		autoFocus
 																		id="qr"
 																		label="QR Kodu Okutunuz"
 																		name="qr"
