@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import { Redirect } from "react-router-dom";
 import LoginContext from '../../contexts/login/loginContext'
-import OpenSelectedContext from '../../contexts/openSelected/openSelectedContext';
+import OpenContext from '../../contexts/open/openContext';
 import HomePage from "../homePage";
 import Sidebar from '../Sidebar';
 import Header from '../Header';
@@ -93,14 +93,14 @@ const useStyles = makeStyles((theme) => ({
 
 const Dashboard = () => {
   	const { handleLogout, didMount, isLogin } = useContext(LoginContext)
-	const { open, selected, setSelected, handleDrawerOpen, handleDrawerClose } = useContext(OpenSelectedContext)
+	const { open, selected, setSelected, handleDrawerOpen, handleDrawerClose } = useContext(OpenContext)
 
 	const classes = useStyles();
 
 	const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
 	useEffect(( ) => {
-
+		didMount();
 	}, [])
 
   	return ((isLogin)

@@ -1,11 +1,10 @@
 import { useReducer } from "react";
-import OpenContext from './openSelectedContext';
-import OpenReducer from './openSelectedReducer';
+import OpenContext from './openContext';
+import OpenReducer from './openReducer';
 
 const OpenState = (props) => {
     const initialState = {
-        open: false,
-		selected: 0
+        open: false
     }
 
     const [state, dispatch] = useReducer(OpenReducer, initialState);
@@ -19,13 +18,6 @@ const OpenState = (props) => {
 		}
 	}
 
-	const setSelected = (value) => {
-		dispatch({
-			type: "SET_SELECTED",
-			payload: value
-		})
-	}
-
 	const handleDrawerOpen = () => {
 		setOpen(true);
 	};
@@ -36,9 +28,7 @@ const OpenState = (props) => {
 	return (<OpenContext.Provider
 			value={{
 				open: state.open,
-				selected: state.selected,
 				setOpen,
-				setSelected,
 				handleDrawerOpen,
 				handleDrawerClose
 			}

@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, Redirect } from "react-router-dom";
 import LoginContext from '../../contexts/login/loginContext';
 import RFIDContext from '../../contexts/rfid/rfidContext';
 import Sidebar from '../Sidebar';
@@ -116,6 +116,7 @@ const UrunTeslim = () => {
 	const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
 	useEffect(( ) => {
+		didMount();
 	}, [])
 
 
@@ -128,7 +129,7 @@ const UrunTeslim = () => {
 				<Tanıma />
 			</div>))
   		:
-  		history.push('/giris')
+		<Redirect to="/anasayfa" />
 	);
 }
 

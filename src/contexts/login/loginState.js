@@ -1,6 +1,7 @@
-import { useReducer } from "react";
+import React, { useContext, useReducer } from "react";
 import LoginReducer from './loginReducer';
 import LoginContext from './loginContext';
+import OpenContext from '../open/openContext';
 import axios from "axios";
 
 const LoginState = (props) => {
@@ -13,18 +14,18 @@ const LoginState = (props) => {
 		email: '',
 		phone: '',
 		isLogin: false
-    }
+    };
 
     const [state, dispatch] = useReducer(LoginReducer, initialState);
 
 	const didMount = () => {
-		// if(localStorage.getItem('token')){
-		// 	dispatch({
-		// 		type: "SET_ISLOGIN",
-		// 		payload: true,
-		// 	})
-		// 	console.log(state.isLogin)
-		// }
+		if(localStorage.getItem('token')){
+			dispatch({
+				type: "SET_ISLOGIN",
+				payload: true,
+			})
+			console.log(state.isLogin)
+		}
 		// else{
 		// 	dispatch({
 		// 		type: "SET_ISLOGIN",
@@ -45,7 +46,7 @@ const LoginState = (props) => {
 					payload: json.username
 				})
 			})
-			.catch(err => console.log(err));
+			.catch(err => console.log(err.non_field_errors[0]));
 		}
 		if(state.isLogin){
 			axios
@@ -80,8 +81,8 @@ const LoginState = (props) => {
 					type: "SET_ISLOGIN",
 					payload: true
 				})
-		  	}
-		);
+		  	})
+			.catch(res => console.log(res.json().non_field_errors[0]));
 		axios
 			.get(`http://localhost:8000/api/sarfKullanicilar/${state.username}?format=json`)
 			.then(res => {
@@ -127,6 +128,7 @@ const LoginState = (props) => {
                 phone: '',
 			}
 		})
+		
 	}
 
 	return (<LoginContext.Provider

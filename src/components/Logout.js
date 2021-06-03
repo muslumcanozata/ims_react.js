@@ -14,6 +14,7 @@ import Avatar from '@material-ui/core/Avatar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { deepOrange } from '@material-ui/core/colors';
 import { TextField, Typography } from '@material-ui/core';
+import OpenContext from '../contexts/open/openContext';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -52,6 +53,7 @@ export default function MenuListComposition() {
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
 	const { firstName, lastName, handleLogout } = useContext(LoginContext);
+  const { handleDrawerClose } = useContext(OpenContext);
 
 	const fixedAvatarClass = clsx(classes.orange, classes.small);
 
@@ -84,10 +86,6 @@ export default function MenuListComposition() {
 
     prevOpen.current = open;
   }, [open]);
-
-	const firstLetter = firstName.slice(0,1);
-	console.log(firstName);
-	console.log(firstLetter);
 
   return (
     <div className={classes.root}>
@@ -122,7 +120,7 @@ export default function MenuListComposition() {
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
                     <Typography className={classes.hosgeldin}>{firstName} {lastName} </Typography>
-                    <MenuItem onClick={handleLogout}>Çıkış</MenuItem>
+                    <MenuItem onClick={() => { handleDrawerClose(); handleLogout(); }}>Çıkış</MenuItem>
                   </MenuList>
                 </ClickAwayListener>
               </Paper>

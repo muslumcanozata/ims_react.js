@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import LoginContext from '../contexts/login/loginContext'
-import OpenSelectedContext from '../contexts/openSelected/openSelectedContext';
+import OpenSelectedContext from '../contexts/open/openContext';
 import Logout from './Logout'
 //MaterialUI
 import clsx from 'clsx';

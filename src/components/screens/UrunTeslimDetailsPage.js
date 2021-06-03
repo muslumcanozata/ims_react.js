@@ -3,7 +3,7 @@ import { useHistory, Redirect } from 'react-router-dom';
 import RFIDContext from '../../contexts/rfid/rfidContext';
 import UrunTeslimDetails from '../UrunTeslimDetails';
 import LoginContext from '../../contexts/login/loginContext';
-import OpenSelectedContext from '../../contexts/openSelected/openSelectedContext';
+import OpenSelectedContext from '../../contexts/open/openContext';
 import Header from '../Header';
 import Sidebar from '../Sidebar';
 //Material-UI
@@ -91,7 +91,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const UrunTeslimDetailsPage = ( { match } ) => {
+const UrunTeslimDetailsPage = () => {
     const { isIdentificate } = useContext(RFIDContext)
     const { didMount, isLogin } = useContext(LoginContext)
 
@@ -99,6 +99,7 @@ const UrunTeslimDetailsPage = ( { match } ) => {
 	const classes = useStyles();
 
 	useEffect(() => {
+		didMount();
 	}, []);
 
   	return (
@@ -111,7 +112,7 @@ const UrunTeslimDetailsPage = ( { match } ) => {
                 <UrunTeslimDetails/> 
 			</div>)
             :
-            (history.push("/urunteslim")))
+            (<Redirect to="/urunteslim"/>))
 		:
     	(<Redirect to="/giris"/>)
     );

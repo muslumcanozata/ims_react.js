@@ -2,16 +2,16 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 import LoginState from './contexts/login/loginState';
-import OpenSelectedState from './contexts/openSelected/openSelectedState'
+import OpenState from './contexts/open/openState'
 import RFIDState from './contexts/rfid/rfidState'
 
 ReactDOM.render(
     <LoginState>
-        <OpenSelectedState>
+        <OpenState>
             <RFIDState>
                 <App/>
             </RFIDState>
-        </OpenSelectedState>
+        </OpenState>
     </LoginState>, 
     document.getElementById('root')
 );

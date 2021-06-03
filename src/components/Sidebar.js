@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import OpenSelectedContext from '../contexts/openSelected/openSelectedContext';
+import OpenContext from '../contexts/open/openContext';
 //MaterialUI
 import clsx from 'clsx';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 const Sidebar = () => {
-	const { open, handleDrawerClose } = useContext(OpenSelectedContext)
+	const { open, handleDrawerClose } = useContext(OpenContext)
 
 	const classes = useStyles();
 
