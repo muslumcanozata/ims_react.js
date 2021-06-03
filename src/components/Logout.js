@@ -13,6 +13,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { deepOrange } from '@material-ui/core/colors';
+import { TextField, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,6 +21,12 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     marginRight: theme.spacing(2),
+  },
+  paperPopover: {
+    marginTop: theme.spacing(2),
+  },
+  popper: {
+    padding: theme.spacing(2),
   },
 	buttonText: {
 		textTransform: 'none',
@@ -34,6 +41,10 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.getContrastText(deepOrange[500]),
     backgroundColor: deepOrange[500],
   },
+  hosgeldin: {
+    margin: theme.spacing(2),
+    color: '#3f51b5'
+  }
 }));
 
 export default function MenuListComposition() {
@@ -95,23 +106,22 @@ export default function MenuListComposition() {
           onClick={handleToggle}
 					className={classes.buttonText}
         >
-					{firstName}  &nbsp;
+					<i class="fas fa-user fa-lg"></i>  &nbsp;
 							{/* <Avatar alt="Remy Sharp" className={fixedAvatarClass}>
 								{firstLetter}
 							</Avatar> */}
 									{open ? <i class="fas fa-chevron-up"></i> : <i class="fas fa-chevron-down"></i>}
         </Button>
-        <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
+        <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition className={classes.popper}>
           {({ TransitionProps, placement }) => (
             <Grow
               {...TransitionProps}
               style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
             >
-              <Paper>
+              <Paper className={classes.paperPopover}>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                    <MenuItem onClick={handleClose}>Profile</MenuItem>
-                    <MenuItem onClick={handleClose}>My account</MenuItem>
+                    <Typography className={classes.hosgeldin}>{firstName} {lastName} </Typography>
                     <MenuItem onClick={handleLogout}>Çıkış</MenuItem>
                   </MenuList>
                 </ClickAwayListener>
