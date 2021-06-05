@@ -2,9 +2,9 @@ import React, { useEffect, useContext } from "react";
 import { Link, useHistory, Redirect } from "react-router-dom";
 import LoginContext from '../../contexts/login/loginContext';
 import RFIDContext from '../../contexts/rfid/rfidContext';
-import Sidebar from '../Sidebar';
-import Header from '../Header';
-import Tanıma from '../Tanıma';
+import Sidebar from '../menus/Sidebar';
+import Header from '../menus/Header';
+import Tanıma from '../papers/Tanıma';
 // MaterialUI
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
@@ -55,12 +55,6 @@ const useStyles = makeStyles((theme) => ({
 		duration: theme.transitions.duration.enteringScreen,
 		}),
 	},
-	menuButton: {
-		marginRight: 36,
-	},
-	menuButtonHidden: {
-		display: 'none',
-	},
 	title: {
 		flexGrow: 1,
 	},
@@ -106,7 +100,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const UrunTeslim = () => {
+const UrunTeslimPage = () => {
     const { isLogin, didMount } = useContext(LoginContext)
 	const { rfid, isIdentificate } = useContext(RFIDContext)
 
@@ -133,4 +127,4 @@ const UrunTeslim = () => {
 	);
 }
 
-export default UrunTeslim;
+export default UrunTeslimPage;

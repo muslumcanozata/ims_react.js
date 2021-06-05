@@ -3,8 +3,8 @@ import { Redirect } from "react-router-dom";
 import LoginContext from '../../contexts/login/loginContext'
 import OpenContext from '../../contexts/open/openContext';
 import HomePage from "../homePage";
-import Sidebar from '../Sidebar';
-import Header from '../Header';
+import Sidebar from '../menus/Sidebar';
+import Header from '../menus/Header';
 //MaterialUI
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';

@@ -1,8 +1,8 @@
 import React, { useContext,useState } from "react";
 import { useHistory } from "react-router-dom";
-import Copyright from "./Copyright";
-import Title from "./Title"
-import RFIDContext from "../contexts/rfid/rfidContext";
+import Copyright from "../Copyright";
+import Title from "../Title"
+import RFIDContext from "../../contexts/rfid/rfidContext";
 // MaterialUI
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
@@ -15,6 +15,7 @@ import Popover from '@material-ui/core/Popover';
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
 import TextField from '@material-ui/core/TextField';
 import { useTheme } from '@material-ui/core/styles';
+import ProductsContext from "../../contexts/availableProducts/productsContext";
 
 
 
@@ -62,7 +63,7 @@ const Tanıma = () => {
 	const tanimaPaper = clsx(classes.paper, classes.tanimaHeight);
 
 	const { rfid, qr, isIdentificate, handleRFin, handleQRin, handleRFChange, handleQRChange } = useContext(RFIDContext)
-
+	const { getProducts } = useContext(ProductsContext)
 	function goNext(keyword) {
 		history.push(`/urunteslim/${keyword}`)
 	}
@@ -127,6 +128,7 @@ const Tanıma = () => {
 																				handleRFin(event, {
 																					rfid: rfid
 																				})
+																				getProducts();
 																				history.push(`/urunteslimdetay`)
 																			} 
 																		}}

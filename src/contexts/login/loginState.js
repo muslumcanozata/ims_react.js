@@ -1,7 +1,6 @@
 import React, { useContext, useReducer } from "react";
 import LoginReducer from './loginReducer';
 import LoginContext from './loginContext';
-import OpenContext from '../open/openContext';
 import axios from "axios";
 
 const LoginState = (props) => {
@@ -19,7 +18,7 @@ const LoginState = (props) => {
     const [state, dispatch] = useReducer(LoginReducer, initialState);
 
 	const didMount = () => {
-		if(localStorage.getItem('token')){
+		if(sessionStorage.getItem('token')){
 			dispatch({
 				type: "SET_ISLOGIN",
 				payload: true,
@@ -36,7 +35,7 @@ const LoginState = (props) => {
 			fetch('http://localhost:8000/api/current_user/', {
 				method : 'GET',
 				headers : {
-					Authorization : `JWT ${localStorage.getItem('token')}`
+					Authorization : `JWT ${sessionStorage.getItem('token')}`
 				}
 			})
 			.then(res => res.json())
@@ -72,7 +71,7 @@ const LoginState = (props) => {
 		)
 			.then(res => res.json())
 			.then(json => {
-				localStorage.setItem('token', json.token);
+				sessionStorage.setItem('token', json.token);
 				dispatch({
 					type: "SET_USERNAME",
 					payload: json.user.username
@@ -109,7 +108,7 @@ const LoginState = (props) => {
 	}
 
 	const handleLogout = () => {
-		localStorage.removeItem('token');
+		sessionStorage.removeItem('token');
 		dispatch({
 			type: "SET_ISLOGIN",
 			payload: false

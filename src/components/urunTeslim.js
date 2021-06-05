@@ -8,8 +8,9 @@ import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Chart from './papers/Chart';
-import Deposits from './papers/Deposits';
+import AvailableProductsTable from "./papers/availableProductsTable";
+import EmployeeDetails from "./papers/EmployeeDetails";
+import Basket from "./papers/basket";
 
 const drawerWidth = 240;
 
@@ -34,12 +35,12 @@ const useStyles = makeStyles((theme) => ({
 		flexDirection: 'column',
 	},
 	fixedHeight: {
-		height: 240,
+		height: '%100',
 	},
 }));
 
 
-const HomePage = () => {
+const UrunTeslim = () => {
 
 	const classes = useStyles();
 	const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
@@ -52,15 +53,21 @@ const HomePage = () => {
 			  	<Container maxWidth="lg" className={classes.container}>
 					<Grid container spacing={3}>
 						{/* Chart */}
-						<Grid item xs={12} md={8} lg={9}>
-							<Paper className={fixedHeightPaper}>
-								<Chart />
+						<Grid item xs={12} md={12} lg={12}>
+							<Paper className={classes.paper}>
+                                <EmployeeDetails/>
 							</Paper>
 						</Grid>
 						{/* Recent Deposits */}
-						<Grid item xs={12} md={4} lg={3}>
-							<Paper className={fixedHeightPaper}>
-								<Deposits />
+						<Grid item xs={12} md={12} lg={12}>
+							<Paper className={classes.paper}>
+                                <AvailableProductsTable/>
+							</Paper>
+						</Grid>
+						{/* Basket */}
+						<Grid item xs={12} md={12} lg={12}>
+							<Paper className={classes.paper}>
+                                <Basket/>
 							</Paper>
 						</Grid>
 					</Grid>
@@ -73,4 +80,4 @@ const HomePage = () => {
 	);
 };
 
-export default HomePage;
+export default UrunTeslim;

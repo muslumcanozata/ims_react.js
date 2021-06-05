@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import LoginContext from '../contexts/login/loginContext';
+import LoginContext from '../../contexts/login/loginContext';
 import clsx from 'clsx';
 //Material-UI
 import Button from '@material-ui/core/Button';
@@ -10,11 +10,9 @@ import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import { makeStyles } from '@material-ui/core/styles';
-import Avatar from '@material-ui/core/Avatar';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import { deepOrange } from '@material-ui/core/colors';
-import { TextField, Typography } from '@material-ui/core';
-import OpenContext from '../contexts/open/openContext';
+import { Typography } from '@material-ui/core';
+import OpenContext from '../../contexts/open/openContext';
 
 const useStyles = makeStyles((theme) => ({
   root: {

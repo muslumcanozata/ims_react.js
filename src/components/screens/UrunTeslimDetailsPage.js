@@ -1,11 +1,10 @@
 import React, { useContext, useEffect } from 'react'
 import { useHistory, Redirect } from 'react-router-dom';
 import RFIDContext from '../../contexts/rfid/rfidContext';
-import UrunTeslimDetails from '../UrunTeslimDetails';
 import LoginContext from '../../contexts/login/loginContext';
-import OpenSelectedContext from '../../contexts/open/openContext';
-import Header from '../Header';
-import Sidebar from '../Sidebar';
+import Header from '../menus/Header';
+import Sidebar from '../menus/Sidebar';
+import UrunTeslim from '../urunTeslim';
 //Material-UI
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
@@ -109,7 +108,7 @@ const UrunTeslimDetailsPage = () => {
 			(<div className={classes.root}>
 				<Header />
 				<Sidebar />
-                <UrunTeslimDetails/> 
+				<UrunTeslim/>
 			</div>)
             :
             (<Redirect to="/urunteslim"/>))
