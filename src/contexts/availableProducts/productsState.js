@@ -2,8 +2,7 @@ import { useReducer } from 'react';
 import ProductsReducer from './productsReducer';
 import ProductsContext from './productsContext';
 import axios from "axios";
-import BasketItem from '../../models/basketItem';
-
+import {BasketItem} from '../../models/basketItem';
 
 
 const ProductsState = (props) => {
@@ -11,8 +10,21 @@ const ProductsState = (props) => {
         availableProducts : [],
         basket: [/*'verilenadet': 3, 'istenilenadet': 3, 'per_isno': 22222, 'kull_isno': 11111, 'urun_id': 5*/]
     }
+
+    const addBasketItem = (urunid, name, istenilen, amount ) => {
+        
+        
+        var basketItem = new BasketItem(name, amount, istenilen, 1111, 22222, urunid);
+        console.log(basketItem)
+        state.basket.push(basketItem);
+    }
     
     const [state, dispatch] = useReducer(ProductsReducer, initialState);
+
+    
+    const getBasket = () => {
+        return state.basket;
+    }
 
     const postBasket = () => {
         fetch('http://localhost:8000/api/urunHareketler/', {
@@ -61,7 +73,9 @@ const ProductsState = (props) => {
             availableProducts: state.availableProducts,
             basket: state.basket,
             getProducts,
-            postBasket
+            postBasket,
+            addBasketItem,
+            getBasket
         }}>
         {props.children}
     </ProductsContext.Provider>)

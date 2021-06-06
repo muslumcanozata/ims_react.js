@@ -19,6 +19,11 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
 import Alert1 from '../Alert';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import { render } from '@testing-library/react';
 
 
 // Generate Order Data
@@ -72,24 +77,39 @@ const useStyles = makeStyles((theme) => ({
 	fixedHeight: {
 		height: 240,
 	},
+    formControl: {
+        margin: theme.spacing(1),
+        minWidth: 120,
+      },
+      selectEmpty: {
+        marginTop: theme.spacing(2),
+      },
 }));
 
 const AvailableProductsTable = () => {
     
-    const { availableProducts } = useContext(ProductsContext)
+    const { availableProducts, addBasketItem } = useContext(ProductsContext)
     const classes = useStyles();
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
     const { setAlert } = useContext(AlertContext);
-    const addBasketItem = (urunid, istenilen ) => {
 
-    }
-    
+    const [age, setAge] = React.useState('');
+
+    const handleChange = (event) => {
+      setAge(event.target.value);
+    };
 
     var adet;
 
     const handleAdetChange = (e, adet) => {
 
+    }
+
+    const menuItems = (row) => {
+        for(var i=0; i<=row; i++){
+            return(<MenuItem value={i}>{i}</MenuItem>)
+        }     
     }
 
     return (
@@ -112,7 +132,18 @@ const AvailableProductsTable = () => {
                                 <TableCell>{row[1]}</TableCell>
                                 <TableCell>{row[2]}</TableCell>
                                 <TableCell>
-                                    <TextField
+                                    <FormControl className={classes.formControl} >
+                                        <InputLabel id="demo-simple-select-label"></InputLabel>
+                                        <Select
+                                        labelId="demo-simple-select-label"
+                                        id="demo-simple-select"
+                                        value={row[2]}
+                                        onChange={handleChange}
+                                        >
+                                            <MenuItem value={10}>10</MenuItem>
+                                        </Select>
+                                    </FormControl>
+                                    {/* <TextField
                                     onChange={(e) => {
                                         if(e.target.value > row[2] || e.target.value < 0){
                                             console.log(e.target.value)
@@ -126,10 +157,10 @@ const AvailableProductsTable = () => {
                                     label="İstenilen Adet"
                                     name="adet"
                                     defaultValue={row[2]}
-                                    />
+                                    /> */}
                                 </TableCell>
                                 <TableCell>
-                                    <Button variant="contained" color="primary" onClick={addBasketItem(row[0], row[2])} >
+                                    <Button variant="contained" color="primary" onClick={() => addBasketItem(row[0], row[1], row[2], 2)} >
                                         Ekle
                                     </Button>
                                 </TableCell>

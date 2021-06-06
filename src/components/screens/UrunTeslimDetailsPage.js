@@ -111,7 +111,6 @@ const UrunTeslimDetailsPage = () => {
 				<Header />
 				<Sidebar />
 				<UrunTeslim/>
-				<Alert1 />
 			</div>)
             :
             (<Redirect to="/urunteslim"/>))
