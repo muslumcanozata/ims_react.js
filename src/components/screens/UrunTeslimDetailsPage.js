@@ -5,6 +5,8 @@ import LoginContext from '../../contexts/login/loginContext';
 import Header from '../menus/Header';
 import Sidebar from '../menus/Sidebar';
 import UrunTeslim from '../urunTeslim';
+import Alert1 from '../Alert';
+
 //Material-UI
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
@@ -109,6 +111,7 @@ const UrunTeslimDetailsPage = () => {
 				<Header />
 				<Sidebar />
 				<UrunTeslim/>
+				<Alert1 />
 			</div>)
             :
             (<Redirect to="/urunteslim"/>))

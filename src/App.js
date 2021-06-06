@@ -6,6 +6,7 @@ import LoginContext from "./contexts/login/loginContext";
 import Home from './components/screens/Home';
 import UrunTeslimPage from "./components/screens/UrunTeslimPage";
 import UrunTeslimDetailsPage from "./components/screens/UrunTeslimDetailsPage.js";
+import Alert1 from './components/Alert'
 
 
 const App = () => {
@@ -16,15 +17,18 @@ const App = () => {
 	}, [])
 
 	return (
-		<BrowserRouter>
-			<Switch>
-				<Route path="/" exact component={Home}></Route>
-				<Route path="/giris" exact component={LoginScreen}></Route>
-				<Route path="/anasayfa" exact component={Dashboard}></Route>
-				<Route path="/urunteslim" exact component={UrunTeslimPage}></Route>
-				<Route path="/urunteslimdetay" exact component={UrunTeslimDetailsPage}></Route>
-				</Switch>
-		</BrowserRouter>
+		<>
+			
+			<BrowserRouter>
+				<Switch>
+					<Route path="/" exact component={Home}></Route>
+					<Route path="/giris" exact component={LoginScreen}></Route>
+					<Route path="/anasayfa" exact component={Dashboard}></Route>
+					<Route path="/urunteslim" exact component={UrunTeslimPage}></Route>
+					<Route path="/urunteslimdetay" exact component={UrunTeslimDetailsPage}></Route>
+					</Switch>
+			</BrowserRouter>
+		</>
 	);
 };
 

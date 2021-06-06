@@ -18,45 +18,45 @@ const LoginState = (props) => {
     const [state, dispatch] = useReducer(LoginReducer, initialState);
 
 	const didMount = () => {
-		if(sessionStorage.getItem('token')){
-			dispatch({
-				type: "SET_ISLOGIN",
-				payload: true,
-			})
-			console.log(state.isLogin)
-		}
-		// else{
+		// if(sessionStorage.getItem('token')){
 		// 	dispatch({
 		// 		type: "SET_ISLOGIN",
-		// 		payload: false,
+		// 		payload: true,
 		// 	})
+		// 	console.log(state.isLogin)
 		// }
-		if(state.isLogin){
-			fetch('http://localhost:8000/api/current_user/', {
-				method : 'GET',
-				headers : {
-					Authorization : `JWT ${sessionStorage.getItem('token')}`
-				}
-			})
-			.then(res => res.json())
-			.then(json => {
-				dispatch({
-					type: "SET_USERNAME",
-					payload: json.username
-				})
-			})
-			.catch(err => console.log(err.non_field_errors[0]));
-		}
-		if(state.isLogin){
-			axios
-				.get(`http://localhost:8000/api/sarfKullanicilar/${state.username}?format=json`)
-				.then(res => {
-					dispatch({
-						type: "SET_OTHERS",
-						payload: res.data
-					})
-				})
-		}
+		// // else{
+		// // 	dispatch({
+		// // 		type: "SET_ISLOGIN",
+		// // 		payload: false,
+		// // 	})
+		// // }
+		// if(state.isLogin){
+		// 	fetch('http://localhost:8000/api/current_user/', {
+		// 		method : 'GET',
+		// 		headers : {
+		// 			Authorization : `JWT ${sessionStorage.getItem('token')}`
+		// 		}
+		// 	})
+		// 	.then(res => res.json())
+		// 	.then(json => {
+		// 		dispatch({
+		// 			type: "SET_USERNAME",
+		// 			payload: json.username
+		// 		})
+		// 	})
+		// 	.catch(err => console.log(err.non_field_errors[0]));
+		// }
+		// if(state.isLogin){
+		// 	axios
+		// 		.get(`http://localhost:8000/api/sarfKullanicilar/${state.username}?format=json`)
+		// 		.then(res => {
+		// 			dispatch({
+		// 				type: "SET_OTHERS",
+		// 				payload: res.data
+		// 			})
+		// 		})
+		// }
 	}
 
 	const handleLogin = (e, data) => {

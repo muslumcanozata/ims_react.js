@@ -3,6 +3,7 @@ import Link from '@material-ui/core/Link';
 import clsx from 'clsx';
 import Title from '../Title';
 import ProductsContext from '../../contexts/availableProducts/productsContext';
+import AlertContext from '../../contexts/alert/alertContext';
 //Material-UI
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -15,6 +16,9 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
+import Snackbar from '@material-ui/core/Snackbar';
+import Alert from '@material-ui/lab/Alert';
+import Alert1 from '../Alert';
 
 
 // Generate Order Data
@@ -43,6 +47,12 @@ const useStyles = makeStyles((theme) => ({
     root: {
 		display: 'flex',
 	},
+    root1: {
+        width: '100%',
+        '& > * + *': {
+            marginTop: theme.spacing(2),
+        },
+    },
 	appBarSpacer: theme.mixins.toolbar,
 	content: {
 		flexGrow: 1,
@@ -70,11 +80,21 @@ const AvailableProductsTable = () => {
     const classes = useStyles();
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
+    const { setAlert } = useContext(AlertContext);
     const addBasketItem = (urunid, istenilen ) => {
 
     }
+    
+
+    var adet;
+
+    const handleAdetChange = (e, adet) => {
+
+    }
+
     return (
         <React.Fragment>
+            
             <Title>Alınabilecek Ürünler</Title>
                 <Table size="small">
                     <TableHead>
@@ -82,6 +102,7 @@ const AvailableProductsTable = () => {
                             <TableCell>ID</TableCell>
                             <TableCell>Ürün</TableCell>
                             <TableCell>Alınabilecek Adet</TableCell>
+                            <TableCell>İstenilen Adet</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -91,30 +112,21 @@ const AvailableProductsTable = () => {
                                 <TableCell>{row[1]}</TableCell>
                                 <TableCell>{row[2]}</TableCell>
                                 <TableCell>
-                                    {/* <div>
-                                        <DialogContent style={{ width: 300 }}>
-                                            <TextField
-                                                SelectProps={{
-                                                MenuProps: {
-                                                    PopoverClasses: {
-                                                    root: classes.customMenuPopover
-                                                    }
-                                                }
-                                                }}
-                                                variant="outlined"
-                                                select
-                                                label="Gender"
-                                                fullWidth
-                                            >
-                                                {row[2].map((row) => (
-                                                <MenuItem key={row} value={row} style={{ zIndex: 1900 }}>
-                                                    {row}
-                                                </MenuItem>
-                                                ))}
-                                            </TextField>
-                                        </DialogContent>
-                                    </div> */}
-
+                                    <TextField
+                                    onChange={(e) => {
+                                        if(e.target.value > row[2] || e.target.value < 0){
+                                            console.log(e.target.value)
+                                            setAlert('HATA','error')
+                                        }
+                                    }}
+                                    value={adet}
+                                    variant="outlined"
+                                    required
+                                    id="adet"
+                                    label="İstenilen Adet"
+                                    name="adet"
+                                    defaultValue={row[2]}
+                                    />
                                 </TableCell>
                                 <TableCell>
                                     <Button variant="contained" color="primary" onClick={addBasketItem(row[0], row[2])} >
@@ -130,8 +142,9 @@ const AvailableProductsTable = () => {
                         See more orders
                     </Link>
                 </div>
+                
         </React.Fragment>
-  );
+    );
 }
 
 export default AvailableProductsTable;
