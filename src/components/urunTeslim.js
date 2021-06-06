@@ -1,4 +1,4 @@
-import React from "react";
+import React ,{ useState }from "react";
 import Copyright from "./Copyright";
 // MaterialUI
 import clsx from 'clsx';
@@ -45,6 +45,9 @@ const UrunTeslim = () => {
 	const classes = useStyles();
 	const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
+	//AVAILABLE PRODUCTTAN ALDIĞIN DATAYI STATE TE TUT VE BASKET'E YOLLA
+	const [basketData, setBasketData] = useState([]);
+
   	return (
 		<div className={classes.root}>
 			<CssBaseline />
@@ -61,13 +64,13 @@ const UrunTeslim = () => {
 						{/* Recent Deposits */}
 						<Grid item xs={12} md={12} lg={12}>
 							<Paper className={classes.paper}>
-                                <AvailableProductsTable/>
+                                <AvailableProductsTable setBasketData={(addedData) => setBasketData(addedData)}/>
 							</Paper>
 						</Grid>
 						{/* Basket */}
 						<Grid item xs={12} md={12} lg={12}>
 							<Paper className={classes.paper}>
-                                <Basket/>
+                                <Basket basketData={basketData}/>
 							</Paper>
 						</Grid>
 					</Grid>

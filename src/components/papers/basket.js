@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const Basket = () => {
+const Basket = (props) => {
 
     const { basket, postBasket } = useContext(ProductsContext)
     const classes = useStyles();
@@ -83,7 +83,7 @@ const Basket = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {basket.map((row) => (
+                        {props.basketData && props.basketData.length > 0 && props.basketData.map((row) =>  (
                             <TableRow key={row[0]}>
                                 <TableCell>{row[0]}</TableCell>
                                 <TableCell>{row[1]}</TableCell>

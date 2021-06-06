@@ -20,6 +20,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
 import Alert1 from '../Alert';
 
+import {BasketItem} from '../../models/basketItem'
 
 // Generate Order Data
 function createData(id, date, name, shipTo, paymentMethod, amount) {
@@ -74,15 +75,21 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const AvailableProductsTable = () => {
+const AvailableProductsTable = (props) => {
     
     const { availableProducts } = useContext(ProductsContext)
     const classes = useStyles();
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
     const { setAlert } = useContext(AlertContext);
-    const addBasketItem = (urunid, istenilen ) => {
-
+    
+    const addBasketItem = (urunid, name, istenilen, amount) => {
+        var basketItem = new BasketItem(name, amount, istenilen, 1111, 22222, urunid);
+        console.log(basketItem)
+        //DATAYI TEMP DEĞİŞKENE AL VE SETBASKETDATA İLE PARENTA (URUNTESLIME) YOLLA
+        let tempDataSource = Array.isArray(props.dataSource) ? props.dataSource : []
+        tempDataSource.push(basketItem);
+        props.setBasketData(tempDataSource)
     }
     
 
@@ -129,7 +136,7 @@ const AvailableProductsTable = () => {
                                     />
                                 </TableCell>
                                 <TableCell>
-                                    <Button variant="contained" color="primary" onClick={addBasketItem(row[0], row[2])} >
+                                    <Button variant="contained" color="primary" onClick={addBasketItem(row[0], row[1], row[2], 2)} >
                                         Ekle
                                     </Button>
                                 </TableCell>
