@@ -60,7 +60,10 @@ const ProductsState = (props) => {
     }
 
     const setBasket = (basketItems) => {
-
+        dispatch({
+            type: "SET_BASKET",
+            payload: basketItems
+        })
     }
     
     const getProducts = () => {
@@ -95,7 +98,8 @@ const ProductsState = (props) => {
             getProducts,
             postBasket,
             addBasketItem,
-            getBasket
+            getBasket,
+            setBasket
         }}>
         {props.children}
     </ProductsContext.Provider>)

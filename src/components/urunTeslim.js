@@ -44,9 +44,6 @@ const UrunTeslim = () => {
 	//AVAILABLE PRODUCTTAN ALD IĞIN DATAYI STATE TE TUT VE BASKET'E YOLLA
 	const [basketData, setBasketData] = useState([]);
 
-	useEffect(() => {
-	},[basketData])
-
 	const classes = useStyles();
 	const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 

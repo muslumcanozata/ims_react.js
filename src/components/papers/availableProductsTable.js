@@ -74,7 +74,7 @@ const useStyles = makeStyles((theme) => ({
 
 const AvailableProductsTable = (props) => {
     
-    const { availableProducts } = useContext(ProductsContext)
+    const { availableProducts, setBasket } = useContext(ProductsContext)
     const classes = useStyles();
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
@@ -94,7 +94,8 @@ const AvailableProductsTable = (props) => {
         console.log(tempDataSource)
         console.log(props.basketData)
         tempDataSource.push(basketItem);
-        props.setBasketData(tempDataSource)
+        props.setBasketData(tempDataSource);
+        setBasket(props.basketData);
     }
 
     var adet;
