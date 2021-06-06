@@ -1,9 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Link from '@material-ui/core/Link';
 import clsx from 'clsx';
 import Title from '../Title';
 import ProductsContext from '../../contexts/availableProducts/productsContext';
 import AlertContext from '../../contexts/alert/alertContext';
+import {BasketItem} from '../../models/basketItem'
+
 //Material-UI
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -24,22 +26,6 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { render } from '@testing-library/react';
-
-
-// Generate Order Data
-function createData(id, date, name, shipTo, paymentMethod, amount) {
-    return { id, date, name, shipTo, paymentMethod, amount };
-}
-
-// const rows = [
-//     createData(0, '16 Mar, 2019', 'Elvis Presley', 'Tupelo, MS', 'VISA ⠀•••• 3719', 312.44),
-//     createData(1, '16 Mar, 2019', 'Paul McCartney', 'London, UK', 'VISA ⠀•••• 2574', 866.99),
-//     createData(2, '16 Mar, 2019', 'Tom Scholz', 'Boston, MA', 'MC ⠀•••• 1253', 100.81),
-//     createData(3, '16 Mar, 2019', 'Michael Jackson', 'Gary, IN', 'AMEX ⠀•••• 2000', 654.39),
-//     createData(4, '15 Mar, 2019', 'Bruce Springsteen', 'Long Branch, NJ', 'VISA ⠀•••• 5919', 212.79),
-// ];
-
-
 
 function preventDefault(event) {
     event.preventDefault();
@@ -86,9 +72,9 @@ const useStyles = makeStyles((theme) => ({
       },
 }));
 
-const AvailableProductsTable = () => {
+const AvailableProductsTable = (props) => {
     
-    const { availableProducts, addBasketItem } = useContext(ProductsContext)
+    const { availableProducts } = useContext(ProductsContext)
     const classes = useStyles();
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
@@ -99,6 +85,17 @@ const AvailableProductsTable = () => {
     const handleChange = (event) => {
       setAge(event.target.value);
     };
+
+    const addBasketItem = (urunid, name, istenilen, amount ) => {
+        var basketItem = new BasketItem(name, amount, istenilen, 1111, 22222, urunid);
+        console.log(basketItem)
+        //DATAYI TEMP DEĞİŞKENE AL VE SETBASKETDATA İLE PARENTA (URUNTESLIME) YOLLA
+        let tempDataSource = props.basketData
+        console.log(tempDataSource)
+        console.log(props.basketData)
+        tempDataSource.push(basketItem);
+        props.setBasketData(tempDataSource)
+    }
 
     var adet;
 

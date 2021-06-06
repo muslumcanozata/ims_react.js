@@ -11,6 +11,10 @@ const ProductsState = (props) => {
         basket: [/*'verilenadet': 3, 'istenilenadet': 3, 'per_isno': 22222, 'kull_isno': 11111, 'urun_id': 5*/]
     }
 
+    const options = {
+        headers: {'Content-Type': 'application/json'}
+    };    
+
     const addBasketItem = (urunid, name, istenilen, amount ) => {
         
         
@@ -26,22 +30,38 @@ const ProductsState = (props) => {
         return state.basket;
     }
 
-    const postBasket = () => {
-        fetch('http://localhost:8000/api/urunHareketler/', {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json'
-		},
+    // const postBasket = () => {
+    //     fetch('http://localhost:8000/api/urunHareketler/', {
+	// 	method: 'POST',
+	// 	headers: {
+	// 		'Content-Type': 'application/json'
+	// 	},
 
-		body: JSON.stringify(state.basket)
-		})
-		.then(res => res.json())
-		.then(json => {
-				console.log(json)
-	     	})
- 		.catch(res => console.log(res.json().non_field_errors[0]));
+	// 	body: JSON.stringify(state.basket)
+	// 	})
+	// 	.then(res => res.json())
+	// 	.then(json => {
+	// 			console.log(json)
+	//      	})
+ 	// 	.catch(res => console.log(res.json().non_field_errors[0]));
+    // }
+
+    const postBasket = (dataSource) => {
+        dispatch({
+            type: "SET_BASKET",
+            payload: dataSource
+        })
+        axios.post('http://localhost:8000/api/urunHareketler/?format=json', { body: JSON.stringify(state.basket[0]) }, options)
+        .then(res => res.json())
+        .then(json => {
+                console.log(json)
+             })
+         .catch(res => console.log(res));
     }
 
+    const setBasket = (basketItems) => {
+
+    }
     
     const getProducts = () => {
         axios
