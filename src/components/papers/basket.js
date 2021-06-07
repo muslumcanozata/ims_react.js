@@ -1,5 +1,6 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Link from '@material-ui/core/Link';
+import {BasketItem} from '../../models/basketItem'
 //Material-UI
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -10,23 +11,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
 import Title from '../Title';
 import ProductsContext from '../../contexts/availableProducts/productsContext';
-import BasketItem from '../../models/basketItem'
-
-
-// Generate Order Data
-function createData(id, date, name, shipTo, paymentMethod, amount) {
-    return { id, date, name, shipTo, paymentMethod, amount };
-}
-
-// const rows = [
-//     createData(0, '16 Mar, 2019', 'Elvis Presley', 'Tupelo, MS', 'VISA ⠀•••• 3719', 312.44),
-//     createData(1, '16 Mar, 2019', 'Paul McCartney', 'London, UK', 'VISA ⠀•••• 2574', 866.99),
-//     createData(2, '16 Mar, 2019', 'Tom Scholz', 'Boston, MA', 'MC ⠀•••• 1253', 100.81),
-//     createData(3, '16 Mar, 2019', 'Michael Jackson', 'Gary, IN', 'AMEX ⠀•••• 2000', 654.39),
-//     createData(4, '15 Mar, 2019', 'Bruce Springsteen', 'Long Branch, NJ', 'VISA ⠀•••• 5919', 212.79),
-// ];
-
-
+import RFIDContext from '../../contexts/rfid/rfidContext';
 
 function preventDefault(event) {
     event.preventDefault();
@@ -37,37 +22,46 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(3),
     },
     root: {
-		display: 'flex',
-	},
-	appBarSpacer: theme.mixins.toolbar,
-	content: {
-		flexGrow: 1,
-		height: '100vh',
-		overflow: 'auto',
-	},
-	container: {
-		paddingTop: theme.spacing(4),
-		paddingBottom: theme.spacing(4),
-	},
-	paper: {
-		padding: theme.spacing(2),
-		display: 'flex',
-		overflow: 'auto',
-		flexDirection: 'column',
-	},
-	fixedHeight: {
-		height: 240,
-	},
+        display: 'flex',
+    },
+    appBarSpacer: theme.mixins.toolbar,
+    content: {
+        flexGrow: 1,
+        height: '100vh',
+        overflow: 'auto',
+    },
+    container: {
+        paddingTop: theme.spacing(4),
+        paddingBottom: theme.spacing(4),
+    },
+    paper: {
+        padding: theme.spacing(2),
+        display: 'flex',
+        overflow: 'auto',
+        flexDirection: 'column',
+    },
+    fixedHeight: {
+        height: 240,
+    },
 }));
 
 const Basket = (props) => {
-
-    const { basket, postBasket } = useContext(ProductsContext)
+    const { basket, postBasket, setBasket } = useContext(ProductsContext)
+    const { handleOut } = useContext(RFIDContext)
     const classes = useStyles();
-    var item = {};
     
-    const dropBasketItem = () => {
+    const dropBasketItem = (urunid) => {
+        let garbageData = props.basketData.filter((obj) => obj.urun_id !== urunid);
+        let garbageData2 = basket.filter((obj) => obj.urun_id !== urunid);
+        props.setBasketData(garbageData)
+        setBasket(garbageData2);
+    }
 
+    
+    const postBasketData = () => {
+        postBasket();
+        setBasket([]);
+        handleOut();
     }
 
 
@@ -83,13 +77,14 @@ const Basket = (props) => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {props.basketData && props.basketData.length > 0 && props.basketData.map((row) =>  (
-                            <TableRow key={row[0]}>
-                                <TableCell>{row[0]}</TableCell>
-                                <TableCell>{row[1]}</TableCell>
-                                <TableCell>{row[2]}</TableCell>
+                        {/*props.basketData && kısmını null check gibi düşünebilirsin. Eğer props.basketData dolu ise rendera başlar*/}
+                        {props.basketData && props.basketData.map((row) => (
+                            <TableRow key={row.urun_id}>
+                                <TableCell>{row.urun_id}</TableCell>
+                                <TableCell>{row.name}</TableCell>
+                                <TableCell>{row.istenilenadet}</TableCell>
                                 <TableCell>
-                                    <Button variant="contained" color="primary" >
+                                    <Button variant="contained" color="primary" onClick={() => dropBasketItem(/*row.urun_id, row.name, row.istenilenadet, 2*/row.urun_id)} >
                                         Çıkar
                                     </Button>
                                 </TableCell>
@@ -97,14 +92,14 @@ const Basket = (props) => {
                         ))}
                     </TableBody>
                 </Table>
-                <Button onClick={postBasket}>Post</Button>
+                <Button onClick={postBasketData}>Post</Button>
                 <div className={classes.seeMore}>
                     <Link color="primary" href="#" onClick={preventDefault}>
                         See more orders
                     </Link>
                 </div>
         </React.Fragment>
-  );
+);
 }
 
 export default Basket;

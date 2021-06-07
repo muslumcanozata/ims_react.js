@@ -1,4 +1,4 @@
-import React ,{ useState }from "react";
+import React, { useEffect, useState } from "react";
 import Copyright from "./Copyright";
 // MaterialUI
 import clsx from 'clsx';
@@ -41,6 +41,8 @@ const useStyles = makeStyles((theme) => ({
 
 
 const UrunTeslim = () => {
+	//AVAILABLE PRODUCTTAN ALD IĞIN DATAYI STATE TE TUT VE BASKET'E YOLLA
+	const [basketData, setBasketData] = useState([]);
 
 	const classes = useStyles();
 	const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
@@ -55,22 +57,23 @@ const UrunTeslim = () => {
 			  	<div className={classes.appBarSpacer} />
 			  	<Container maxWidth="lg" className={classes.container}>
 					<Grid container spacing={3}>
-						{/* Chart */}
+						{/* Personel */}
 						<Grid item xs={12} md={12} lg={12}>
 							<Paper className={classes.paper}>
-                                <EmployeeDetails/>
+                                <EmployeeDetails />
 							</Paper>
 						</Grid>
-						{/* Recent Deposits */}
+						{/* Alınabilecek Ürünler */}
 						<Grid item xs={12} md={12} lg={12}>
 							<Paper className={classes.paper}>
-                                <AvailableProductsTable setBasketData={(addedData) => setBasketData(addedData)}/>
+                                <AvailableProductsTable basketData={basketData} setBasketData={setBasketData}/>
 							</Paper>
 						</Grid>
-						{/* Basket */}
+						{/* Sepet */}
 						<Grid item xs={12} md={12} lg={12}>
 							<Paper className={classes.paper}>
-                                <Basket basketData={basketData}/>
+								{/*Basket Datayı Props Olarak Ver ve Renderla*/} 
+                                <Basket basketData={basketData} setBasketData={setBasketData}/>
 							</Paper>
 						</Grid>
 					</Grid>

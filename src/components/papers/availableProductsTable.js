@@ -1,9 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Link from '@material-ui/core/Link';
 import clsx from 'clsx';
 import Title from '../Title';
 import ProductsContext from '../../contexts/availableProducts/productsContext';
 import AlertContext from '../../contexts/alert/alertContext';
+import {BasketItem} from '../../models/basketItem'
+
 //Material-UI
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -19,23 +21,12 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
 import Alert1 from '../Alert';
-
-import {BasketItem} from '../../models/basketItem'
-
-// Generate Order Data
-function createData(id, date, name, shipTo, paymentMethod, amount) {
-    return { id, date, name, shipTo, paymentMethod, amount };
-}
-
-// const rows = [
-//     createData(0, '16 Mar, 2019', 'Elvis Presley', 'Tupelo, MS', 'VISA ⠀•••• 3719', 312.44),
-//     createData(1, '16 Mar, 2019', 'Paul McCartney', 'London, UK', 'VISA ⠀•••• 2574', 866.99),
-//     createData(2, '16 Mar, 2019', 'Tom Scholz', 'Boston, MA', 'MC ⠀•••• 1253', 100.81),
-//     createData(3, '16 Mar, 2019', 'Michael Jackson', 'Gary, IN', 'AMEX ⠀•••• 2000', 654.39),
-//     createData(4, '15 Mar, 2019', 'Bruce Springsteen', 'Long Branch, NJ', 'VISA ⠀•••• 5919', 212.79),
-// ];
-
-
+import InputLabel from '@material-ui/core/InputLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import { render } from '@testing-library/react';
+import { PostItem } from '../../models/postItem';
 
 function preventDefault(event) {
     event.preventDefault();
@@ -73,35 +64,67 @@ const useStyles = makeStyles((theme) => ({
 	fixedHeight: {
 		height: 240,
 	},
+    formControl: {
+        margin: theme.spacing(1),
+        minWidth: 120,
+      },
+      selectEmpty: {
+        marginTop: theme.spacing(2),
+      },
 }));
 
 const AvailableProductsTable = (props) => {
     
-    const { availableProducts } = useContext(ProductsContext)
+    const { availableProducts, basket, setBasket } = useContext(ProductsContext)
     const classes = useStyles();
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
     const { setAlert } = useContext(AlertContext);
-    
-    const addBasketItem = (urunid, name, istenilen, amount) => {
-        var basketItem = new BasketItem(name, amount, istenilen, 1111, 22222, urunid);
-        console.log(basketItem)
+
+    const [age, setAge] = React.useState('');
+
+    const handleChange = (event) => {
+      setAge(event.target.value);
+    };
+
+    const addBasketItem = (urunid, name, istenilen, amount ) => {
+        if(props.basketData.some(item => urunid === item.urun_id)){ 
+            console.log('alert')
+        }
+        else {
+            var basketItem = new BasketItem(name, amount, istenilen, 22222, 11111, urunid);
+        var postItem = new PostItem(amount, istenilen, 22222, 11111, urunid)
+        console.log(PostItem)
         //DATAYI TEMP DEĞİŞKENE AL VE SETBASKETDATA İLE PARENTA (URUNTESLIME) YOLLA
-        let tempDataSource = Array.isArray(props.dataSource) ? props.dataSource : []
+        let tempDataSource = props.basketData
+        let tempPostDataSource = basket;
+        tempPostDataSource.push(postItem);
         tempDataSource.push(basketItem);
-        props.setBasketData(tempDataSource)
+        props.setBasketData(tempDataSource);
+        setBasket(tempPostDataSource);
+        }
     }
-    
 
     var adet;
 
     const handleAdetChange = (e, adet) => {
+        e.preventDefault();
+    }
 
+    var menuItem = [];
+
+    const menuItems = (row) => {
+        for(var i=1; i<=row; i++){
+            menuItem.push(<MenuItem value={i}>{i}</MenuItem>)
+        }
+    }
+
+    const dropItems = () => {
+        menuItem = [];
     }
 
     return (
         <React.Fragment>
-            
             <Title>Alınabilecek Ürünler</Title>
                 <Table size="small">
                     <TableHead>
@@ -119,7 +142,22 @@ const AvailableProductsTable = (props) => {
                                 <TableCell>{row[1]}</TableCell>
                                 <TableCell>{row[2]}</TableCell>
                                 <TableCell>
-                                    <TextField
+                                    <FormControl className={classes.formControl} >
+                                        <InputLabel id="demo-simple-select-label"></InputLabel>
+                                        <Select
+                                        labelId="demo-simple-select-label"
+                                        id="demo-simple-select"
+                                        value={row[2]}
+                                        onChange={handleAdetChange}
+                                        >   
+                                            <div>
+                                                {menuItems(row[2])}
+                                                {menuItem}
+                                                {dropItems()}
+                                            </div>
+                                        </Select>
+                                    </FormControl>
+                                    {/* <TextField
                                     onChange={(e) => {
                                         if(e.target.value > row[2] || e.target.value < 0){
                                             console.log(e.target.value)
@@ -133,10 +171,10 @@ const AvailableProductsTable = (props) => {
                                     label="İstenilen Adet"
                                     name="adet"
                                     defaultValue={row[2]}
-                                    />
+                                    /> */}
                                 </TableCell>
                                 <TableCell>
-                                    <Button variant="contained" color="primary" onClick={addBasketItem(row[0], row[1], row[2], 2)} >
+                                    <Button variant="contained" color="primary" onClick={() => addBasketItem(row[0], row[1], row[2], 2)} >
                                         Ekle
                                     </Button>
                                 </TableCell>
