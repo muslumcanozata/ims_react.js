@@ -47,6 +47,9 @@ const UrunTeslim = () => {
 	const classes = useStyles();
 	const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
+	//AVAILABLE PRODUCTTAN ALDIĞIN DATAYI STATE TE TUT VE BASKET'E YOLLA
+	const [basketData, setBasketData] = useState([]);
+
   	return (
 		<div className={classes.root}>
 			<CssBaseline />
