@@ -11,6 +11,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
 import Title from '../Title';
 import ProductsContext from '../../contexts/availableProducts/productsContext';
+import RFIDContext from '../../contexts/rfid/rfidContext';
 
 function preventDefault(event) {
     event.preventDefault();
@@ -46,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Basket = (props) => {
     const { basket, postBasket, setBasket } = useContext(ProductsContext)
+    const { handleOut } = useContext(RFIDContext)
     const classes = useStyles();
     
     const dropBasketItem = (urunid) => {
@@ -55,6 +57,12 @@ const Basket = (props) => {
         setBasket(garbageData2);
     }
 
+    
+    const postBasketData = () => {
+        postBasket();
+        setBasket([]);
+        handleOut();
+    }
 
 
     return (
@@ -84,7 +92,7 @@ const Basket = (props) => {
                         ))}
                     </TableBody>
                 </Table>
-                <Button onClick={postBasket}>Post</Button>
+                <Button onClick={postBasketData}>Post</Button>
                 <div className={classes.seeMore}>
                     <Link color="primary" href="#" onClick={preventDefault}>
                         See more orders

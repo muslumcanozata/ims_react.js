@@ -88,7 +88,11 @@ const AvailableProductsTable = (props) => {
     };
 
     const addBasketItem = (urunid, name, istenilen, amount ) => {
-        var basketItem = new BasketItem(name, amount, istenilen, 22222, 11111, urunid);
+        if(props.basketData.some(item => urunid === item.urun_id)){ 
+            console.log('alert')
+        }
+        else {
+            var basketItem = new BasketItem(name, amount, istenilen, 22222, 11111, urunid);
         var postItem = new PostItem(amount, istenilen, 22222, 11111, urunid)
         console.log(PostItem)
         //DATAYI TEMP DEĞİŞKENE AL VE SETBASKETDATA İLE PARENTA (URUNTESLIME) YOLLA
@@ -98,6 +102,7 @@ const AvailableProductsTable = (props) => {
         tempDataSource.push(basketItem);
         props.setBasketData(tempDataSource);
         setBasket(tempPostDataSource);
+        }
     }
 
     var adet;
@@ -109,7 +114,7 @@ const AvailableProductsTable = (props) => {
     var menuItem = [];
 
     const menuItems = (row) => {
-        for(var i=0; i<=row; i++){
+        for(var i=1; i<=row; i++){
             menuItem.push(<MenuItem value={i}>{i}</MenuItem>)
         }
     }

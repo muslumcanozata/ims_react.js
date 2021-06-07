@@ -3,12 +3,14 @@ import ProductsReducer from './productsReducer';
 import ProductsContext from './productsContext';
 import axios from "axios";
 import {BasketItem} from '../../models/basketItem';
+import { useHistory } from 'react-router';
 
 
 const ProductsState = (props) => {
+
     const initialState = {
         availableProducts : [],
-        basket: [/*'verilenadet': 3, 'istenilenadet': 3, 'per_isno': 22222, 'kull_isno': 11111, 'urun_id': 5*/]
+        basket: [/*'verilenadet': 3, 'istenilenadet': 3, 'per_isno': 22222, 'kull_isno': 11111, 'urun_id': 5*/],
     }
 
     const options = {
@@ -22,44 +24,13 @@ const ProductsState = (props) => {
         return state.basket;
     }
 
-    // const postBasket = () => {
-        // fetch('http://localhost:8000/api/urunHareketler/', {
-		// method: 'POST',
-		// headers: {
-		// 	'Content-Type': 'application/json'
-		// },
-
-		// body: JSON.stringify(state.basket)
-		// })
-		// .then(res => res.json())
-		// .then(json => {
-		// 		console.log(json)
-	    //  	})
- 		// .catch(res => console.log(res.json().non_field_errors[0]));
-    // }
-
     const postBasket = () => {
-        console.log(state.basket)
-
-        // fetch('http://localhost:8000/api/urunHareketler/', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-    
-        //     body: JSON.stringify(state.basket)
-        //     })
-        //     .then(res => res.json())
-        //     .then(json => {
-        //             console.log(json)
-        //          })
-        //      .catch(res => console.log(res.response));
-        axios.post('http://localhost:8000/api/urunHareketler/', { body: state.basket }, options)
-        .then(res => console.log(res))
-        .then(json => {
-                console.log(json)
-                })
-        .catch(res => console.log(res.response));
+        axios.post('http://localhost:8000/api/urunHareketler/', JSON.stringify(state.basket), options)
+            .then(res => res.json())
+            .then(json => {
+                    console.log(json)
+                    })
+            .catch(res => console.log(res.response));
     }
 
     const setBasket = (basketItems) => {
