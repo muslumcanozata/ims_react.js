@@ -1,6 +1,5 @@
-export class BasketItem{
-    constructor(name, verilenadet, istenilenadet, per_isno_id, kull_isno_id, urun_id) {
-        this.name = name;
+export class PostItem{
+    constructor(verilenadet, istenilenadet, per_isno_id, kull_isno_id ,urun_id) {
         this.verilenadet= verilenadet;
         this.istenilenadet= istenilenadet;
         this.per_isno_id=per_isno_id;

@@ -70,7 +70,7 @@ const UrunTeslim = () => {
 						<Grid item xs={12} md={12} lg={12}>
 							<Paper className={classes.paper}>
 								{/*Basket Datayı Props Olarak Ver ve Renderla*/} 
-                                <Basket basketData={basketData}/>
+                                <Basket basketData={basketData} setBasketData={setBasketData}/>
 							</Paper>
 						</Grid>
 					</Grid>

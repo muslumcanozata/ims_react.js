@@ -26,6 +26,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { render } from '@testing-library/react';
+import { PostItem } from '../../models/postItem';
 
 function preventDefault(event) {
     event.preventDefault();
@@ -74,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
 
 const AvailableProductsTable = (props) => {
     
-    const { availableProducts, setBasket } = useContext(ProductsContext)
+    const { availableProducts, basket, setBasket } = useContext(ProductsContext)
     const classes = useStyles();
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
@@ -87,32 +88,38 @@ const AvailableProductsTable = (props) => {
     };
 
     const addBasketItem = (urunid, name, istenilen, amount ) => {
-        var basketItem = new BasketItem(name, amount, istenilen, 1111, 22222, urunid);
-        console.log(basketItem)
+        var basketItem = new BasketItem(name, amount, istenilen, 22222, 11111, urunid);
+        var postItem = new PostItem(amount, istenilen, 22222, 11111, urunid)
+        console.log(PostItem)
         //DATAYI TEMP DEĞİŞKENE AL VE SETBASKETDATA İLE PARENTA (URUNTESLIME) YOLLA
         let tempDataSource = props.basketData
-        console.log(tempDataSource)
-        console.log(props.basketData)
+        let tempPostDataSource = basket;
+        tempPostDataSource.push(postItem);
         tempDataSource.push(basketItem);
         props.setBasketData(tempDataSource);
-        setBasket(props.basketData);
+        setBasket(tempPostDataSource);
     }
 
     var adet;
 
     const handleAdetChange = (e, adet) => {
-
+        e.preventDefault();
     }
+
+    var menuItem = [];
 
     const menuItems = (row) => {
         for(var i=0; i<=row; i++){
-            return(<MenuItem value={i}>{i}</MenuItem>)
-        }     
+            menuItem.push(<MenuItem value={i}>{i}</MenuItem>)
+        }
+    }
+
+    const dropItems = () => {
+        menuItem = [];
     }
 
     return (
         <React.Fragment>
-            
             <Title>Alınabilecek Ürünler</Title>
                 <Table size="small">
                     <TableHead>
@@ -136,9 +143,13 @@ const AvailableProductsTable = (props) => {
                                         labelId="demo-simple-select-label"
                                         id="demo-simple-select"
                                         value={row[2]}
-                                        onChange={handleChange}
-                                        >
-                                            <MenuItem value={10}>10</MenuItem>
+                                        onChange={handleAdetChange}
+                                        >   
+                                            <div>
+                                                {menuItems(row[2])}
+                                                {menuItem}
+                                                {dropItems()}
+                                            </div>
                                         </Select>
                                     </FormControl>
                                     {/* <TextField

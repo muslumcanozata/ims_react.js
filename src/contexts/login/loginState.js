@@ -25,12 +25,12 @@ const LoginState = (props) => {
 		// 	})
 		// 	console.log(state.isLogin)
 		// }
-		// // else{
-		// // 	dispatch({
-		// // 		type: "SET_ISLOGIN",
-		// // 		payload: false,
-		// // 	})
-		// // }
+		// else{
+		// 	dispatch({
+		// 		type: "SET_ISLOGIN",
+		// 		payload: false,
+		// 	})
+		// }
 		// if(state.isLogin){
 		// 	fetch('http://localhost:8000/api/current_user/', {
 		// 		method : 'GET',
