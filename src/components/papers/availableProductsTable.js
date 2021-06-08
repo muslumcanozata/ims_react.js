@@ -1,10 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import Link from '@material-ui/core/Link';
 import clsx from 'clsx';
 import Title from '../Title';
-import ProductsContext from '../../contexts/availableProducts/productsContext';
+import { BasketItem } from '../../models/basketItem'
+import { PostItem } from '../../models/postItem';
+import RFIDContext from '../../contexts/rfid/rfidContext';
 import AlertContext from '../../contexts/alert/alertContext';
-import {BasketItem} from '../../models/basketItem'
+import Alert1 from '../Alert';
 
 //Material-UI
 import { makeStyles } from '@material-ui/core/styles';
@@ -14,21 +16,12 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
-import Dialog from "@material-ui/core/Dialog";
-import DialogContent from "@material-ui/core/DialogContent";
-import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
-import Alert1 from '../Alert';
 import InputLabel from '@material-ui/core/InputLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import { render } from '@testing-library/react';
-import { PostItem } from '../../models/postItem';
-import RFIDState from '../../contexts/rfid/rfidState';
-import RFIDContext from '../../contexts/rfid/rfidContext';
 
 function preventDefault(event) {
     event.preventDefault();

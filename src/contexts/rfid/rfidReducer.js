@@ -8,7 +8,8 @@ const RFIDReducer = (state, action) => {
                 isim: action.payload.isim,
                 soyisim: action.payload.soyisim,
                 tel: action.payload.tel2,
-                grup: action.payload.grup
+                grup: action.payload.grup,
+                cinsiyet: action.payload.cinsiyet
             }
         case "GET_PERSONELWQR":
             return {
@@ -19,7 +20,8 @@ const RFIDReducer = (state, action) => {
                 soyisim: action.payload.soyisim,
                 rfid: action.payload.rfid,
                 tel: action.payload.tel2,
-                grup: action.payload.grup
+                grup: action.payload.grup,
+                cinsiyet: action.payload.cinsiyet
             }
         case "GET_PERSONELWISNO":
             return {
@@ -29,7 +31,8 @@ const RFIDReducer = (state, action) => {
                 soyisim: action.payload.soyisim,
                 rfid: action.payload.rfid,
                 tel: action.payload.tel2,
-                grup: action.payload.grup
+                grup: action.payload.grup,
+                cinsiyet: action.payload.cinsiyet
             }
         case "SET_RFID":
             return {
@@ -60,6 +63,9 @@ const RFIDReducer = (state, action) => {
                 tel: action.payload.tel,
                 rfid: action.payload.rfid,
                 grup: action.payload.grup,
+                cinsiyet: action.payload.cinsiyet,
+                availableProducts: action.payload.availableProducts,
+                basket: action.payload.basket,
                 isIdentificate: action.payload.isIdentificate
             }
         case "SET_PRODUCTS":

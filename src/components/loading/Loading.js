@@ -1,11 +1,28 @@
-import React from 'react'
-import loading from './loading.gif'
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
-const Loading = () => {
-    return (
-        <React.Fragment>
-            <img src={`/${loading}`}  alt="Loading..." style={{width: '200px', display: 'block', margin: 'auto'}}/>
-        </React.Fragment>
-    )
+const useStyles = makeStyles((theme) => ({
+  root: {
+    // display: 'flex',
+    '& > * + *': {
+        marginTop: theme.spacing(2),
+      },
+    position: 'absolute',
+    left: '50%',
+    top: '35%',
+    zIndex: '1000',
+    height: '100px',
+    width: '100px'
+  },
+}));
+
+export default function Loading() {
+  const classes = useStyles();
+
+  return (
+    <div className={classes.root}>
+      <CircularProgress />
+    </div>
+  );
 }
-export  default Loading;

@@ -1,6 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import Link from '@material-ui/core/Link';
-import {BasketItem} from '../../models/basketItem'
+import { BasketItem } from '../../models/basketItem'
+import RFIDContext from '../../contexts/rfid/rfidContext';
+import Title from '../Title';
 //Material-UI
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -9,10 +11,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
-import Title from '../Title';
-import ProductsContext from '../../contexts/availableProducts/productsContext';
-import RFIDContext from '../../contexts/rfid/rfidContext';
-import RFIDState from '../../contexts/rfid/rfidState';
+
 
 function preventDefault(event) {
     event.preventDefault();

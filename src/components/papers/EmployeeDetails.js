@@ -8,8 +8,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import { useTheme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import ProductsContext from "../../contexts/availableProducts/productsContext";
-
 
 const drawerWidth = 240;
 
@@ -60,7 +58,7 @@ const EmployeeDetails = () => {
 		handleOut();
 		history.push(`/urunteslim/`)
 	}
-	
+
     return (
 		<React.Fragment>
 			<Title>Personel Bilgileri</Title>

@@ -12,10 +12,18 @@ const LoginState = (props) => {
 		lastName: '',
 		email: '',
 		phone: '',
+		loading: false,
 		isLogin: false
     };
 
     const [state, dispatch] = useReducer(LoginReducer, initialState);
+
+	const setLoading = (bool) => {
+		dispatch({
+			type: "SET_LOADING",
+			payload: bool,
+		})
+	}
 
 	const didMount = () => {
 		// if(sessionStorage.getItem('token')){
@@ -61,14 +69,15 @@ const LoginState = (props) => {
 
 	const handleLogin = (e, data) => {
 		e.preventDefault();
+		setLoading(true)
 		fetch('http://localhost:8000/token-auth/', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify(data)
+				body: JSON.stringify(data)
 			}
-		)
+			)
 			.then(res => res.json())
 			.then(json => {
 				sessionStorage.setItem('token', json.token);
@@ -80,16 +89,19 @@ const LoginState = (props) => {
 					type: "SET_ISLOGIN",
 					payload: true
 				})
-		  	})
-			.catch(res => console.log(res.json().non_field_errors[0]));
-		axios
-			.get(`http://localhost:8000/api/sarfKullanicilar/${state.username}?format=json`)
-			.then(res => {
-				dispatch({
-					type: "SET_OTHERS",
-					payload: res.data
-				})
 			})
+			.catch(res => console.log(res.json().non_field_errors[0]));
+		setTimeout(() => {
+			axios
+				.get(`http://localhost:8000/api/sarfKullanicilar/${state.username}?format=json`)
+				.then(res => {
+					dispatch({
+						type: "SET_OTHERS",
+						payload: res.data
+					})
+					setLoading(false)
+				})
+		}, 3000);
 	};
 
 	const handleLoginChange = event => {
@@ -139,6 +151,8 @@ const LoginState = (props) => {
 			lastName: state.lastName,
 			email: state.email,
 			phone: state.phone,
+			loading: state.loading,
+			setLoading,
 			handleLogin,
 			handleLoginChange,
 			handleLogout,

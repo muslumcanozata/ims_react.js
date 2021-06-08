@@ -5,6 +5,7 @@ import OpenContext from '../../contexts/open/openContext';
 import HomePage from "../homePage";
 import Sidebar from '../menus/Sidebar';
 import Header from '../menus/Header';
+import Loading from '../loading/Loading'
 //MaterialUI
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
@@ -92,7 +93,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 const Dashboard = () => {
-  	const { handleLogout, didMount, isLogin } = useContext(LoginContext)
+  	const { handleLogout, didMount, isLogin, loading } = useContext(LoginContext)
 	const { open, selected, setSelected, handleDrawerOpen, handleDrawerClose } = useContext(OpenContext)
 
 	const classes = useStyles();
@@ -100,8 +101,10 @@ const Dashboard = () => {
 	const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
 	useEffect(( ) => {
-		didMount();
+		// didMount();
 	}, [])
+
+	if(loading) return <Loading/>
 
   	return ((isLogin)
 	  	?

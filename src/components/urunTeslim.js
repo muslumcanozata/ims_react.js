@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import Copyright from "./Copyright";
 // MaterialUI
 import clsx from 'clsx';
@@ -11,9 +11,8 @@ import Paper from '@material-ui/core/Paper';
 import AvailableProductsTable from "./papers/availableProductsTable";
 import EmployeeDetails from "./papers/EmployeeDetails";
 import Basket from "./papers/basket";
-import Loading from "./loading/Loading";
-import LoadingContext from '../contexts/loading/loadingContext'
 import RFIDContext from "../contexts/rfid/rfidContext";
+import Loading from "./loading/Loading";
 
 const drawerWidth = 240;
 

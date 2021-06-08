@@ -15,8 +15,6 @@ import Popover from '@material-ui/core/Popover';
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
 import TextField from '@material-ui/core/TextField';
 import { useTheme } from '@material-ui/core/styles';
-import ProductsContext from "../../contexts/availableProducts/productsContext";
-
 
 
 const drawerWidth = 240;

@@ -3,8 +3,6 @@ import RFIDReducer from './rfidReducer';
 import RFIDContext from './rfidContext';
 import axios from "axios";
 
-import ProductsContext from '../availableProducts/productsContext'
-
 const RFIDState = (props) => {
     const initialState = {
         isno: [],
@@ -15,6 +13,7 @@ const RFIDState = (props) => {
         rfid: '',
         grup: '',
 		qr: '',
+		cinsiyet: '',
 		availableProducts : [],
         basket: [/*'verilenadet': 3, 'istenilenadet': 3, 'per_isno': 22222, 'kull_isno': 11111, 'urun_id': 5*/],
 		loading: false,
@@ -145,6 +144,9 @@ const RFIDState = (props) => {
 				tel: '',
 				rfid: '',
 				grup: '',
+				cinsiyet: '',
+				availableProducts : [],
+				basket: [],
 				isIdentificate: false
 			}
 		});
@@ -157,7 +159,7 @@ const RFIDState = (props) => {
     }
 
     const postBasket = () => {
-        axios.post('http://localhost:8000/api/urunHareketler/', JSON.stringify(state.basket), options)
+        axios.post('http://localhost:8000/api/urunHareketler/',state.basket, options)
             .then(res => res.json())
             .then(json => {
                     console.log(json)

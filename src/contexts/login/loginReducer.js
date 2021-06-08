@@ -24,6 +24,11 @@ const LoginReducer = (state, action) => {
                 lastName: action.payload.soyisim,
                 phone: action.payload.tel,
             }
+        case "SET_LOADING":
+            return {
+                ...state,
+                loading: action.payload
+            }
         default:
             return state
     }
