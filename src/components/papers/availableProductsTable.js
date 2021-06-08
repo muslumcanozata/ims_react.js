@@ -27,6 +27,8 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { render } from '@testing-library/react';
 import { PostItem } from '../../models/postItem';
+import RFIDState from '../../contexts/rfid/rfidState';
+import RFIDContext from '../../contexts/rfid/rfidContext';
 
 function preventDefault(event) {
     event.preventDefault();
@@ -75,11 +77,11 @@ const useStyles = makeStyles((theme) => ({
 
 const AvailableProductsTable = (props) => {
     
-    const { availableProducts, basket, setBasket } = useContext(ProductsContext)
+    const { availableProducts, basket, setBasket } = useContext(RFIDContext)
     const classes = useStyles();
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
-    const { setAlert } = useContext(AlertContext);
+    // const { setAlert } = useContext(AlertContext);
 
     const [age, setAge] = React.useState('');
 

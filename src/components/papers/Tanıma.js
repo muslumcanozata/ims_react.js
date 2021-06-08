@@ -62,8 +62,7 @@ const Tanıma = () => {
 	const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 	const tanimaPaper = clsx(classes.paper, classes.tanimaHeight);
 
-	const { rfid, qr, isIdentificate, handleIDin, handleRFin, handleQRin, handleRFChange, handleQRChange } = useContext(RFIDContext)
-	const { getProducts } = useContext(ProductsContext)
+	const { rfid, isno, qr, isIdentificate, handleIDin, handleRFin, handleQRin, handleRFChange, handleQRChange } = useContext(RFIDContext)
 	function goNext(keyword) {
 		history.push(`/urunteslim/${keyword}`)
 	}
@@ -79,7 +78,6 @@ const Tanıma = () => {
 		handleQRin(event, {
 			tel: realtel
 		})
-		getProducts();
 		history.push(`/urunteslimdetay`)
 	}
 
@@ -129,7 +127,6 @@ const Tanıma = () => {
 																				handleRFin(event, {
 																					rfid: rfid
 																				})
-																				getProducts();
 																				history.push(`/urunteslimdetay`)
 																			} 
 																		}}
@@ -186,7 +183,6 @@ const Tanıma = () => {
 											<Grid item xs={12} md={6} lg={4} xl={4} className={classes.item}>
 												<Button variant="contained" color="primary" onClick={() => {
 													handleIDin();
-													getProducts();
 													history.push(`/urunteslimdetay`)
 													}}>
 													Yüz Tanıma

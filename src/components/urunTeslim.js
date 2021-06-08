@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Copyright from "./Copyright";
 // MaterialUI
 import clsx from 'clsx';
@@ -11,6 +11,9 @@ import Paper from '@material-ui/core/Paper';
 import AvailableProductsTable from "./papers/availableProductsTable";
 import EmployeeDetails from "./papers/EmployeeDetails";
 import Basket from "./papers/basket";
+import Loading from "./loading/Loading";
+import LoadingContext from '../contexts/loading/loadingContext'
+import RFIDContext from "../contexts/rfid/rfidContext";
 
 const drawerWidth = 240;
 
@@ -47,7 +50,21 @@ const UrunTeslim = () => {
 	const classes = useStyles();
 	const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
-	//AVAILABLE PRODUCTTAN ALDIĞIN DATAYI STATE TE TUT VE BASKET'E YOLLA
+	const {loading} = useContext(RFIDContext)
+
+	if(loading) return(
+		<div className={classes.root}>
+			<CssBaseline />
+			<main className={classes.content}>
+				<div className={classes.appBarSpacer} />
+				<Container maxWidth="lg" className={classes.container}>
+					<Grid container spacing={3}>
+						<Loading/>
+					</Grid>
+				</Container>
+			</main>
+		</div>
+	)
 
   	return (
 		<div className={classes.root}>

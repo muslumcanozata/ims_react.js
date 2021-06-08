@@ -60,9 +60,7 @@ const EmployeeDetails = () => {
 		handleOut();
 		history.push(`/urunteslim/`)
 	}
-
-	const { getProducts } = useContext(ProductsContext)
-
+	
     return (
 		<React.Fragment>
 			<Title>Personel Bilgileri</Title>

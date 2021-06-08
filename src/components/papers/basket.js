@@ -12,6 +12,7 @@ import Button from '@material-ui/core/Button';
 import Title from '../Title';
 import ProductsContext from '../../contexts/availableProducts/productsContext';
 import RFIDContext from '../../contexts/rfid/rfidContext';
+import RFIDState from '../../contexts/rfid/rfidState';
 
 function preventDefault(event) {
     event.preventDefault();
@@ -46,8 +47,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Basket = (props) => {
-    const { basket, postBasket, setBasket } = useContext(ProductsContext)
-    const { handleOut } = useContext(RFIDContext)
+    const { basket, postBasket, setBasket, handleOut } = useContext(RFIDContext)
     const classes = useStyles();
     
     const dropBasketItem = (urunid) => {

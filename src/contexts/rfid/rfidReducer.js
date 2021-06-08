@@ -62,6 +62,21 @@ const RFIDReducer = (state, action) => {
                 grup: action.payload.grup,
                 isIdentificate: action.payload.isIdentificate
             }
+        case "SET_PRODUCTS":
+            return {
+                ...state,
+                availableProducts: action.payload
+            }
+        case "SET_BASKET":
+            return {
+                ...state,
+                basket: action.payload
+            }
+        case "SET_LOADING":
+            return {
+                ...state,
+                loading: action.payload
+            }
         default:
             return state
     }

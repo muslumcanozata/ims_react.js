@@ -1,9 +1,11 @@
-import { useReducer } from 'react';
+import { useReducer, useContext } from 'react';
 import ProductsReducer from './productsReducer';
 import ProductsContext from './productsContext';
 import axios from "axios";
 import {BasketItem} from '../../models/basketItem';
 import { useHistory } from 'react-router';
+
+import LoadingContext from '../loading/loadingContext'
 
 
 const ProductsState = (props) => {
@@ -12,6 +14,8 @@ const ProductsState = (props) => {
         availableProducts : [],
         basket: [/*'verilenadet': 3, 'istenilenadet': 3, 'per_isno': 22222, 'kull_isno': 11111, 'urun_id': 5*/],
     }
+
+    const { setLoading } = useContext(LoadingContext)
 
     const options = {
         headers: {'Content-Type': 'application/json'}
@@ -40,16 +44,25 @@ const ProductsState = (props) => {
         })
     }
     
-    const getProducts = () => {
-        axios
-            .get('http://localhost:8000/api/urunTeslim/?format=json')
-            .then(res => {
-                dispatch({
-                    type: "SET_PRODUCTS",
-                    payload: res.data
+    const getProducts = (data) => {
+        setLoading(true);
+        console.log('getProducts')
+        console.log(data)
+        setTimeout(() => {
+            axios
+                .get(`http://localhost:8000/api/urunTeslim/?format=json&isno=${data}`)
+                .then(res => {
+                    dispatch({
+                        type: "SET_PRODUCTS",
+                        payload: res.data
+                    })
                 })
-            })
-        // fetch('http://localhost:8000/api/urunTeslim', {
+            }, 3000);
+            setTimeout(() => {
+                setLoading(false)
+                
+            }, 3000);
+            // fetch('http://localhost:8000/api/urunTeslim', {
         //     method: 'GET',
         //     headers: {
 		// 		'Content-Type': 'application/json'
@@ -62,7 +75,6 @@ const ProductsState = (props) => {
 		// 			payload: json.data
 		// 		});
         //     })
-    
     }
 
     return (<ProductsContext.Provider
