@@ -62,7 +62,7 @@ const Tanıma = () => {
 	const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 	const tanimaPaper = clsx(classes.paper, classes.tanimaHeight);
 
-	const { rfid, qr, isIdentificate, handleRFin, handleQRin, handleRFChange, handleQRChange } = useContext(RFIDContext)
+	const { rfid, qr, isIdentificate, handleIDin, handleRFin, handleQRin, handleRFChange, handleQRChange } = useContext(RFIDContext)
 	const { getProducts } = useContext(ProductsContext)
 	function goNext(keyword) {
 		history.push(`/urunteslim/${keyword}`)
@@ -79,6 +79,7 @@ const Tanıma = () => {
 		handleQRin(event, {
 			tel: realtel
 		})
+		getProducts();
 		history.push(`/urunteslimdetay`)
 	}
 
@@ -183,39 +184,13 @@ const Tanıma = () => {
 												</PopupState>
 											</Grid>
 											<Grid item xs={12} md={6} lg={4} xl={4} className={classes.item}>
-												<PopupState variant="popover" popupId="demo-popup-popover">
-													{(popupState) => (
-														<div>
-															<Button variant="contained" color="primary" {...bindTrigger(popupState)}>
-																OpenPopOver
-															</Button>
-															<Popover
-																{...bindPopover(popupState)}
-																anchorOrigin={{
-																vertical: 'bottom',
-																horizontal: 'center',
-																}}
-																transformOrigin={{
-																vertical: 'top',
-																horizontal: 'center',
-																}}
-															>
-																<Box p={2}>
-																	<TextField
-																		// value={this.state.message}
-																		// autoFocus={true}
-																		// hintText='Type your message here'
-																		// onChange={this.onChangeMessage}
-																		// onKeyUp={(event) => {
-																		// 	if ( event.key === 'Enter')
-																		// 		this.sendMessage();
-																		// }}
-																	/>
-																</Box>
-															</Popover>
-														</div>
-													)}
-												</PopupState>
+												<Button variant="contained" color="primary" onClick={() => {
+													handleIDin();
+													getProducts();
+													history.push(`/urunteslimdetay`)
+													}}>
+													Yüz Tanıma
+												</Button>
 											</Grid>
 										</Grid>
 								</React.Fragment>
