@@ -49,11 +49,11 @@ export const mainListItems = (
 export const secondaryListItems = (
   <div>
     <ListSubheader inset>Saved reports</ListSubheader>
-    <ListItem button>
+    <ListItem button component={Link} to="/yuztanitma">
       <ListItemIcon>
-        <AssignmentIcon />
+        <i class="fas fa-user-plus fa-lg"></i>
       </ListItemIcon>
-      <ListItemText primary="Current month" />
+      <ListItemText primary="Yüz Tanıtma" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>

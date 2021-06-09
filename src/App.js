@@ -6,6 +6,7 @@ import LoginContext from "./contexts/login/loginContext";
 import Home from './components/screens/Home';
 import UrunTeslimPage from "./components/screens/UrunTeslimPage";
 import UrunTeslimDetailsPage from "./components/screens/UrunTeslimDetailsPage.js";
+import YuzTanitma from './components/screens/YuzTanitma'
 import Alert1 from './components/Alert'
 
 
@@ -26,6 +27,7 @@ const App = () => {
 					<Route path="/anasayfa" exact component={Dashboard}></Route>
 					<Route path="/urunteslim" exact component={UrunTeslimPage}></Route>
 					<Route path="/urunteslimdetay" exact component={UrunTeslimDetailsPage}></Route>
+					<Route path="/yuztanitma" exact component={YuzTanitma}></Route>
 					</Switch>
 			</BrowserRouter>
 		</>

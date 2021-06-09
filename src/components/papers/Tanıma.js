@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
 		display: 'flex',
 		overflow: 'auto',
 		flexDirection: 'column',
-		width: 1500
+		width: '%100'
 	},
 	fixedHeight: {
 		height: 500,

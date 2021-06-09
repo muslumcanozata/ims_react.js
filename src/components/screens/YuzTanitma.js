@@ -2,10 +2,10 @@ import React, { useEffect, useContext } from "react";
 import { Redirect } from "react-router-dom";
 import LoginContext from '../../contexts/login/loginContext'
 import OpenContext from '../../contexts/open/openContext';
-import HomePage from "../homePage";
 import Sidebar from '../menus/Sidebar';
 import Header from '../menus/Header';
 import Loading from '../loading/Loading'
+import YuzTanitmaForm from '../papers/YuzTanitmaForm';
 //MaterialUI
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
@@ -92,7 +92,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const Dashboard = () => {
+const YuzTanitma = () => {
   	const { handleLogout, didMount, isLogin, loading } = useContext(LoginContext)
 	const { open, selected, setSelected, handleDrawerOpen, handleDrawerClose } = useContext(OpenContext)
 
@@ -101,7 +101,7 @@ const Dashboard = () => {
 	const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
 	useEffect(( ) => {
-		didMount();
+		// didMount();
 	}, [])
 
 	if(loading) return <Loading/>
@@ -112,11 +112,11 @@ const Dashboard = () => {
 			<div className={classes.root}>
 				<Header />
 				<Sidebar />
-				<HomePage />
+				<YuzTanitmaForm />
 			</div>)
 		:
     	(<Redirect to="/giris"/>)
 	);
 };
 
-export default Dashboard;
+export default YuzTanitma;
