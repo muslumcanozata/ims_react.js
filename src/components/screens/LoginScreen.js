@@ -15,7 +15,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 function randomPic() {
 	var min = 1;
-	var max = 16;
+	var max = 8;
 	var rand =  Math.floor(min + (Math.random() * (max-min)));
 	return ('/imgs/bg'+ rand + '.jpg')
 }
