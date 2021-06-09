@@ -60,7 +60,7 @@ const LoginState = (props) => {
 					payload: res.data
 				})
 			})
-			.catch(err => console.log(err.non_field_errors[0]));
+			.catch(err => console.log(err));
 		}
 		if(state.isLogin){
 		}

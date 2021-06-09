@@ -91,12 +91,12 @@ const Tanıma = () => {
 								<React.Fragment>
 									<Title>Tanıma Yöntemleri</Title>
 										<Grid container spacing={3}>
-											<Grid item xs={12} md={6} lg={4} xl={4}>
+											<Grid item xs={12} md={12} lg={6} xl={6}>
 												<PopupState variant="popover" popupId="demo-popup-popover">
 													{(popupState) => (
 														<div>
 															<Button style={{textTransform: 'none', fontSize: '16px'}} variant="contained" color="primary" {...bindTrigger(popupState)}>
-   																Personel Kartı İle Tanıma
+															<i class="fas fa-id-card fa-lg"></i>&nbsp;Personel Kartı
 															</Button>
 															<Popover
 																{...bindPopover(popupState)}
@@ -135,12 +135,12 @@ const Tanıma = () => {
 													)}
 												</PopupState>
 											</Grid>
-											<Grid item xs={12} md={6} lg={4} xl={4} className={classes.item}>
+											<Grid item xs={12} md={12} lg={3} xl={3} className={classes.item}>
 												<PopupState variant="popover" popupId="demo-popup-popover">
 													{(popupState) => (
 														<div>
 															<Button variant="contained" style={{textTransform: 'none', fontSize: '16px'}} color="primary" {...bindTrigger(popupState)}>
- 																QR Kod İle Tanıma
+																<i class="fas fa-qrcode fa-lg"></i>QR Kod
 															</Button>
 															<Popover
 																{...bindPopover(popupState)}
@@ -174,16 +174,15 @@ const Tanıma = () => {
 																	/>
 																</Box>
 															</Popover>
-														</div>
-													)}
+														</div>												)}
 												</PopupState>
 											</Grid>
-											<Grid item xs={12} md={6} lg={4} xl={4} className={classes.item}>
+											<Grid item xs={12} md={12} lg={3} xl={3} className={classes.item}>
 												<Button variant="contained" style={{textTransform: 'none', fontSize: '16px'}} color="primary" onClick={() => {
 													handleIDin();
 													history.push(`/urunteslimdetay`)
 													}}>
-													Yüz Tanıma
+													<i class="fas fa-dizzy"></i>&nbsp; Yüz
 												</Button>
 											</Grid>
 										</Grid>
