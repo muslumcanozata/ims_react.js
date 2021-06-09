@@ -52,29 +52,49 @@ const EmployeeDetails = () => {
 	const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 	const tanimaPaper = clsx(classes.paper, classes.tanimaHeight);
 
-	const { rfid, isno, tel, isIdentificate, handleRFin, handleRFChange, handleOut } = useContext(RFIDContext)
+	const { rfid, isno, tel, email, isim, soyisim, cinsiyet, grup, isIdentificate, handleRFin, handleRFChange, handleOut } = useContext(RFIDContext)
 
 	function goBack() {
 		handleOut();
 		history.push(`/urunteslim/`)
 	}
 
+	// isno: [],
+	// email: '',
+	// isim: '',
+	// soyisim: '',
+	// tel: '',
+	// rfid: '',
+	// grup: '',
+	// qr: '',
+	// cinsiyet: '',
     return (
 		<React.Fragment>
 			<Title>Personel Bilgileri</Title>
 				<Grid container spacing={3}>
-					<p>
-						rfid: {rfid}, isno: {isno}, tel: {tel}
-					</p>
-					<Button onClick={() => {		
-							handleOut();
-							history.push(`/urunteslim/`)}
-						}
-						variant="contained" 
-						color="primary" 
-					>
-						Out
-					</Button>
+					<Grid item xs={12} md={4} lg={4} xl={4}>
+						{(cinsiyet==='E' ? (<i class="fas fa-male fa-lg"> : {isim} {soyisim}</i>): (<i class="fas fa-female fa-lg">: {isim} {soyisim}</i>))}
+						<div style={{margin: '20px'}}></div>
+						<i class="fas fa-phone-square-alt fa-lg"> : {tel}</i>
+					</Grid>
+					<Grid item xs={12} md={4} lg={4} xl={4}>
+						<i class="fas fa-user-shield fa-lg"> : {isno}</i>
+						<div style={{margin: '20px'}}></div>
+						<i class="fas fa-users fa-lg"> : {grup}</i>
+					</Grid>
+					<Grid item xs={12} md={4} lg={4} xl={4}>
+						<i class="fas fa-id-card fa-lg"> : {rfid}</i>
+						<div style={{margin: '15px'}}></div>
+						<Button onClick={() => {		
+								handleOut();
+								history.push(`/urunteslim/`)}
+							}
+							variant="contained" 
+							color="secondary" 
+						>
+							Çıkış
+						</Button>
+					</Grid>
 					{/* <button onClick={goBack()}>OUT</button> */}
 				</Grid>
 		</React.Fragment>

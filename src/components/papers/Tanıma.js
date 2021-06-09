@@ -95,7 +95,7 @@ const Tanıma = () => {
 												<PopupState variant="popover" popupId="demo-popup-popover">
 													{(popupState) => (
 														<div>
-															<Button variant="contained" color="primary" {...bindTrigger(popupState)}>
+															<Button style={{textTransform: 'none', fontSize: '16px'}} variant="contained" color="primary" {...bindTrigger(popupState)}>
    																Personel Kartı İle Tanıma
 															</Button>
 															<Popover
@@ -139,8 +139,8 @@ const Tanıma = () => {
 												<PopupState variant="popover" popupId="demo-popup-popover">
 													{(popupState) => (
 														<div>
-															<Button variant="contained" color="primary" {...bindTrigger(popupState)}>
-																QR KOD İLE TANIMA
+															<Button variant="contained" style={{textTransform: 'none', fontSize: '16px'}} color="primary" {...bindTrigger(popupState)}>
+ 																QR Kod İle Tanıma
 															</Button>
 															<Popover
 																{...bindPopover(popupState)}
@@ -179,7 +179,7 @@ const Tanıma = () => {
 												</PopupState>
 											</Grid>
 											<Grid item xs={12} md={6} lg={4} xl={4} className={classes.item}>
-												<Button variant="contained" color="primary" onClick={() => {
+												<Button variant="contained" style={{textTransform: 'none', fontSize: '16px'}} color="primary" onClick={() => {
 													handleIDin();
 													history.push(`/urunteslimdetay`)
 													}}>
