@@ -59,6 +59,7 @@ const EmployeeDetails = () => {
 		history.push(`/urunteslim/`)
 	}
 
+	console.log(cinsiyet)
 	// isno: [],
 	// email: '',
 	// isim: '',
@@ -73,7 +74,7 @@ const EmployeeDetails = () => {
 			<Title>Personel Bilgileri</Title>
 				<Grid container spacing={3}>
 					<Grid item xs={12} md={4} lg={4} xl={4}>
-						{(cinsiyet==='E' ? (<i class="fas fa-male fa-lg"> : {isim} {soyisim}</i>): (<i class="fas fa-female fa-lg">: {isim} {soyisim}</i>))}
+						{(cinsiyet === "E" ? (<i class="fas fa-mars fa-lg"> : {isim} {soyisim}</i>) : (<i class="fas fa-venus fa-lg">: {isim} {soyisim}</i>))}
 						<div style={{margin: '20px'}}></div>
 						<i class="fas fa-phone-square-alt fa-lg"> : {tel}</i>
 					</Grid>

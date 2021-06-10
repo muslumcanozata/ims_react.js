@@ -70,20 +70,20 @@ const Basket = (props) => {
                 <Table size="small">
                     <TableHead>
                         <TableRow>
-                            <TableCell>ID</TableCell>
                             <TableCell>Ürün</TableCell>
                             <TableCell>Alınabilecek Adet</TableCell>
+                            <TableCell>İstenilen Adet</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {/*props.basketData && kısmını null check gibi düşünebilirsin. Eğer props.basketData dolu ise rendera başlar*/}
                         {props.basketData && props.basketData.map((row) => (
                             <TableRow key={row.urun_id}>
-                                <TableCell>{row.urun_id}</TableCell>
                                 <TableCell>{row.name}</TableCell>
-                                <TableCell>{row.istenilenadet}</TableCell>
+                                <TableCell>{row.istenilen}</TableCell>
+                                <TableCell>{row.verilen}</TableCell>
                                 <TableCell>
-                                    <Button variant="contained" color="primary" onClick={() => dropBasketItem(/*row.urun_id, row.name, row.istenilenadet, 2*/row.urun_id)} >
+                                    <Button variant="contained" color="secondary" onClick={() => dropBasketItem(/*row.urun_id, row.name, row.istenilenadet, 2*/row.urun_id)} >
                                         Çıkar
                                     </Button>
                                 </TableCell>

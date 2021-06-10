@@ -41,10 +41,11 @@ const useStyles = makeStyles((theme) => ({
 		display: 'flex',
 		overflow: 'auto',
 		flexDirection: 'column',
-		width: '%100'
+		width: '%100',
+		height: '%100'
 	},
 	fixedHeight: {
-		height: 500,
+		height: 240,
 	},
 	tanimaPaper: {
  		height: 120,
@@ -60,7 +61,7 @@ const Tanıma = () => {
 	const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 	const tanimaPaper = clsx(classes.paper, classes.tanimaHeight);
 
-	const { rfid, isno, qr, isIdentificate, handleIDin, handleRFin, handleQRin, handleRFChange, handleQRChange } = useContext(RFIDContext)
+	const { rfid, qr, handleIDin, handleRFin, handleQRin, handleRFChange, handleQRChange } = useContext(RFIDContext)
 	function goNext(keyword) {
 		history.push(`/urunteslim/${keyword}`)
 	}
@@ -84,19 +85,19 @@ const Tanıma = () => {
 			<main className={classes.content}>
 			  	<div className={classes.appBarSpacer} />
 			  	<Container maxWidth="lg" className={classes.container}>
-					<Paper className={classes.paper} >
+					<Paper className={classes.paper} style={{}}>
 						<Grid container spacing={3} className={classes.root} >
 						{/*Tanıma*/}
 							<Grid item >
 								<React.Fragment>
 									<Title>Tanıma Yöntemleri</Title>
 										<Grid container spacing={3}>
-											<Grid item xs={12} md={12} lg={6} xl={6}>
+											<Grid item xs={12} md={6} lg={4} xl={4}>
 												<PopupState variant="popover" popupId="demo-popup-popover">
 													{(popupState) => (
 														<div>
 															<Button style={{textTransform: 'none', fontSize: '16px'}} variant="contained" color="primary" {...bindTrigger(popupState)}>
-															<i class="fas fa-id-card fa-lg"></i>&nbsp;Personel Kartı
+																<i class="fas fa-id-card fa-lg"></i>&nbsp;Personel Kartı
 															</Button>
 															<Popover
 																{...bindPopover(popupState)}
@@ -135,12 +136,12 @@ const Tanıma = () => {
 													)}
 												</PopupState>
 											</Grid>
-											<Grid item xs={12} md={12} lg={3} xl={3} className={classes.item}>
+											<Grid item xs={12} md={6} lg={4} xl={4} className={classes.item}>
 												<PopupState variant="popover" popupId="demo-popup-popover">
 													{(popupState) => (
 														<div>
 															<Button variant="contained" style={{textTransform: 'none', fontSize: '16px'}} color="primary" {...bindTrigger(popupState)}>
-																<i class="fas fa-qrcode fa-lg"></i>QR Kod
+																<i class="fas fa-qrcode fa-lg"></i>&nbsp;&nbsp;QR Kod
 															</Button>
 															<Popover
 																{...bindPopover(popupState)}
@@ -177,12 +178,12 @@ const Tanıma = () => {
 														</div>												)}
 												</PopupState>
 											</Grid>
-											<Grid item xs={12} md={12} lg={3} xl={3} className={classes.item}>
+											<Grid item xs={12} md={6} lg={4} xl={4} className={classes.item}>
 												<Button variant="contained" style={{textTransform: 'none', fontSize: '16px'}} color="primary" onClick={() => {
 													handleIDin();
 													history.push(`/urunteslimdetay`)
 													}}>
-													<i class="fas fa-dizzy"></i>&nbsp; Yüz
+													<i class="fas fa-dizzy"></i>&nbsp;&nbsp;Yüz
 												</Button>
 											</Grid>
 										</Grid>

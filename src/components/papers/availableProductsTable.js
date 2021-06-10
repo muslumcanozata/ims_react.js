@@ -7,7 +7,7 @@ import { PostItem } from '../../models/postItem';
 import RFIDContext from '../../contexts/rfid/rfidContext';
 import AlertContext from '../../contexts/alert/alertContext';
 import Alert1 from '../Alert';
-
+import LoginContext from '../../contexts/login/loginContext';
 //Material-UI
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -22,6 +22,7 @@ import Alert from '@material-ui/lab/Alert';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import { EventSeat } from '@material-ui/icons';
 
 function preventDefault(event) {
     event.preventDefault();
@@ -70,40 +71,43 @@ const useStyles = makeStyles((theme) => ({
 
 const AvailableProductsTable = (props) => {
     
-    const { availableProducts, basket, setBasket } = useContext(RFIDContext)
+    const { availableProducts, basket, setBasket, isno } = useContext(RFIDContext)
+    const { username } = useContext(LoginContext)
     const classes = useStyles();
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
     // const { setAlert } = useContext(AlertContext);
 
-    const [age, setAge] = React.useState('');
+    const [item, setItem] = React.useState(0);
 
-    const handleChange = (event) => {
-      setAge(event.target.value);
-    };
+    // const handleChange = (event) => {
+    //   setAge(event.target.value);
+    // };
 
     const addBasketItem = (urunid, name, istenilen, amount ) => {
         if(props.basketData.some(item => urunid === item.urun_id)){ 
             console.log('alert')
         }
         else {
-            var basketItem = new BasketItem(name, amount, istenilen, 22222, 11111, urunid);
-        var postItem = new PostItem(amount, istenilen, 22222, 11111, urunid)
-        console.log(PostItem)
-        //DATAYI TEMP DEĞİŞKENE AL VE SETBASKETDATA İLE PARENTA (URUNTESLIME) YOLLA
-        let tempDataSource = props.basketData
-        let tempPostDataSource = basket;
-        tempPostDataSource.push(postItem);
-        tempDataSource.push(basketItem);
-        props.setBasketData(tempDataSource);
-        setBasket(tempPostDataSource);
+            var basketItem = new BasketItem(name, amount, istenilen, isno, username, urunid);
+            var postItem = new PostItem(amount, istenilen, isno, username, urunid)
+            console.log(PostItem)
+            //DATAYI TEMP DEĞİŞKENE AL VE SETBASKETDATA İLE PARENTA (URUNTESLIME) YOLLA
+            let tempDataSource = props.basketData
+            let tempPostDataSource = basket;
+            tempPostDataSource.push(postItem);
+            tempDataSource.push(basketItem);
+            props.setBasketData(tempDataSource);
+            setBasket(tempPostDataSource);
         }
     }
 
     var adet;
 
-    const handleAdetChange = (e, adet) => {
-        e.preventDefault();
+    const handleAdetChange = (event, row) => {
+        event.preventDefault();
+        setItem(event.target.value)
+        row[3] = event.target.value
     }
 
     var menuItem = [];
@@ -124,16 +128,14 @@ const AvailableProductsTable = (props) => {
                 <Table size="small">
                     <TableHead>
                         <TableRow>
-                            <TableCell>ID</TableCell>
                             <TableCell>Ürün</TableCell>
                             <TableCell>Alınabilecek Adet</TableCell>
-                            <TableCell>İstenilen Adet</TableCell>
+                            <TableCell>Teslim Edilecek Adet</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {availableProducts.map((row) => (
                             <TableRow key={row[0]}>
-                                <TableCell>{row[0]}</TableCell>
                                 <TableCell>{row[1]}</TableCell>
                                 <TableCell>{row[2]}</TableCell>
                                 <TableCell>
@@ -142,8 +144,9 @@ const AvailableProductsTable = (props) => {
                                         <Select
                                         labelId="demo-simple-select-label"
                                         id="demo-simple-select"
-                                        value={row[2]}
-                                        onChange={handleAdetChange}
+                                        value={row[3]}
+                                        onChange={(e) => {
+                                            handleAdetChange(e, row)}}
                                         >   
                                             <div>
                                                 {menuItems(row[2])}
@@ -161,7 +164,7 @@ const AvailableProductsTable = (props) => {
                                     }}
                                     value={adet}
                                     variant="outlined"
-                                    required
+                                    requireds
                                     id="adet"
                                     label="İstenilen Adet"
                                     name="adet"
@@ -169,7 +172,7 @@ const AvailableProductsTable = (props) => {
                                     /> */}
                                 </TableCell>
                                 <TableCell>
-                                    <Button variant="contained" color="primary" onClick={() => addBasketItem(row[0], row[1], row[2], 2)} >
+                                    <Button variant="contained" color="primary" onClick={() => addBasketItem(row[0], row[1], row[2], row[3])} >
                                         Ekle
                                     </Button>
                                 </TableCell>

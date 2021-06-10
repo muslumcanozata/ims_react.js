@@ -41,6 +41,7 @@ const RFIDState = (props) => {
 						type: "GET_PERSONELWRFID",
 						payload: res.data
 					});
+					console.log(res.data)
 					return(axios.get(`http://localhost:8000/api/urunTeslim/?format=json&isno=${res.data.isno}`))
 				})
 				.then(res => {
@@ -54,6 +55,9 @@ const RFIDState = (props) => {
 		dispatch({
 			type: "SET_ISIDENTIFICATE",
 			payload: true
+		})
+		state.availableProducts.map((row) => {
+			row.push(0)
 		})
 	};
 
@@ -81,6 +85,9 @@ const RFIDState = (props) => {
 		dispatch({
 			type: "SET_ISIDENTIFICATE",
 			payload: true
+		})
+		state.availableProducts.map((row) => {
+			row.push(0)
 		})
 	};
 	
@@ -110,6 +117,9 @@ const RFIDState = (props) => {
 						payload: res.data
 					})
 					setLoading(false)
+					state.availableProducts.map((row) => {
+						row.push(0)
+					})
 				})
 				.catch(error => console.log(error.response))
 		}, 3000);
@@ -174,6 +184,16 @@ const RFIDState = (props) => {
         })
     }
 
+	const setFaceID = (data) => {
+		setLoading(true)
+		axios.get(`http://localhost:8000/api/user_face_detect/?isno=${data}`)
+		.then(res => res.json())
+		.then(json => {
+				console.log(json)
+				})
+		.catch(res => console.log(res.response));
+	}
+
 	return (<RFIDContext.Provider
 		value={{
 			isno: state.isno,
@@ -184,6 +204,7 @@ const RFIDState = (props) => {
 			rfid: state.rfid,
 			grup: state.grup,
 			faceid: state.faceid,
+			cinsiyet: state.cinsiyet,
 			isIdentificate: state.isIdentificate,
 			availableProducts: state.availableProducts,
 			basket: state.basket,
@@ -197,7 +218,8 @@ const RFIDState = (props) => {
 			handleIDin,
 			handleRFChange,
 			handleQRChange,
-			handleOut
+			handleOut,
+			setFaceID
 		}}>
 			{props.children}
 		</RFIDContext.Provider>);

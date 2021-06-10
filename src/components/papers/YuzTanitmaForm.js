@@ -11,8 +11,6 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
-import Popover from '@material-ui/core/Popover';
-import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
 import TextField from '@material-ui/core/TextField';
 import { useTheme } from '@material-ui/core/styles';
 
@@ -69,6 +67,8 @@ const Tanıma = () => {
 	const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 	const tanimaPaper = clsx(classes.paper, classes.tanimaHeight);
 
+	const { setFaceID } = useContext(RFIDContext)
+
     function goNext(keyword) {
 		history.push(`/urunteslim/${keyword}`)
 	}
@@ -106,6 +106,8 @@ const Tanıma = () => {
 											</Grid>
 											<Grid item xs={12} md={4} lg={4} xl={4}>
 												<Button variant="contained" color="primary" className={classes.button} onClick={() => {
+													console.log(isno)
+													setFaceID(isno)
 													}}>
 													Gönder
 												</Button>
