@@ -87,7 +87,7 @@ const LoginState = (props) => {
 					payload: true
 				})
 			})
-			.catch(res => console.log(res.json().non_field_errors[0]));
+			.catch(res => console.log(res));
 		setTimeout(() => {
 			axios
 				.get(`http://localhost:8000/api/sarfKullanicilar/${state.username}?format=json`)
