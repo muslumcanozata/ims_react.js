@@ -3,6 +3,7 @@ import Link from '@material-ui/core/Link';
 import { BasketItem } from '../../models/basketItem'
 import RFIDContext from '../../contexts/rfid/rfidContext';
 import Title from '../Title';
+import Grid from '@material-ui/core/Grid';
 //Material-UI
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -42,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
     },
     fixedHeight: {
         height: 240,
+       
     },
 }));
 
@@ -67,12 +69,14 @@ const Basket = (props) => {
     return (
         <React.Fragment>
             <Title>Sepet</Title>
+            <Grid container>
                 <Table size="small">
                     <TableHead>
                         <TableRow>
                             <TableCell>Ürün</TableCell>
-                            <TableCell>Alınabilecek Adet</TableCell>
-                            <TableCell>İstenilen Adet</TableCell>
+                            <TableCell>Alınacak Adet</TableCell>
+                            <TableCell></TableCell>
+                            {/* <TableCell>İstenilen Adet</TableCell> */}
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -80,8 +84,8 @@ const Basket = (props) => {
                         {props.basketData && props.basketData.map((row) => (
                             <TableRow key={row.urun_id}>
                                 <TableCell>{row.name}</TableCell>
-                                <TableCell>{row.istenilen}</TableCell>
-                                <TableCell>{row.verilen}</TableCell>
+                                <TableCell>{row.verilenadet}</TableCell>
+                                {/* <TableCell>{row.verilen}</TableCell> */}
                                 <TableCell>
                                     <Button variant="contained" color="secondary" onClick={() => dropBasketItem(/*row.urun_id, row.name, row.istenilenadet, 2*/row.urun_id)} >
                                         Çıkar
@@ -91,11 +95,14 @@ const Basket = (props) => {
                         ))}
                     </TableBody>
                 </Table>
-                <Button onClick={postBasketData}>Post</Button>
+                    <div >
+                        <Button style={{marginTop: '10px'}} variant="contained" color="primary" onClick={postBasketData}>Post</Button>
+                    </div>
+                </Grid>
                 <div className={classes.seeMore}>
-                    <Link color="primary" href="#" onClick={preventDefault}>
+                    {/* <Link color="primary" href="#" onClick={preventDefault}>
                         See more orders
-                    </Link>
+                    </Link> */}
                 </div>
         </React.Fragment>
 );

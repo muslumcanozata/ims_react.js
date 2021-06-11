@@ -7,8 +7,9 @@ const RFIDReducer = (state, action) => {
                 email: action.payload.email,
                 isim: action.payload.isim,
                 soyisim: action.payload.soyisim,
-                tel: action.payload.tel2,
+                tel: action.payload.tel,
                 grup: action.payload.grup,
+                mudurluk: action.payload.mudurluk,
                 cinsiyet: action.payload.cinsiyet
             }
         case "GET_PERSONELWQR":
@@ -19,8 +20,9 @@ const RFIDReducer = (state, action) => {
                 isim: action.payload.isim,
                 soyisim: action.payload.soyisim,
                 rfid: action.payload.rfid,
-                tel: action.payload.tel2,
+                tel: action.payload.tel,
                 grup: action.payload.grup,
+                mudurluk: action.payload.mudurluk,
                 cinsiyet: action.payload.cinsiyet
             }
         case "GET_PERSONELWISNO":
@@ -30,8 +32,9 @@ const RFIDReducer = (state, action) => {
                 isim: action.payload.isim,
                 soyisim: action.payload.soyisim,
                 rfid: action.payload.rfid,
-                tel: action.payload.tel2,
+                tel: action.payload.tel,
                 grup: action.payload.grup,
+                mudurluk: action.payload.mudurluk,
                 cinsiyet: action.payload.cinsiyet
             }
         case "SET_RFID":
@@ -64,9 +67,20 @@ const RFIDReducer = (state, action) => {
                 rfid: action.payload.rfid,
                 grup: action.payload.grup,
                 cinsiyet: action.payload.cinsiyet,
+                mudurluk: action.payload.mudurluk,
                 availableProducts: action.payload.availableProducts,
                 basket: action.payload.basket,
                 isIdentificate: action.payload.isIdentificate
+            }
+        case "SET_MUDURLUK":
+            return {
+                ...state,
+                mudurluk: action.payload
+            }
+        case "SET_GRUP":
+            return {
+                ...state,
+                grup: action.payload
             }
         case "SET_PRODUCTS":
             return {

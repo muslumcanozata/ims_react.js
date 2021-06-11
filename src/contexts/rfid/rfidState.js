@@ -5,7 +5,7 @@ import axios from "axios";
 
 const RFIDState = (props) => {
     const initialState = {
-        isno: [],
+        isno: '',
         email: '',
         isim: '',
         soyisim: '',
@@ -14,8 +14,9 @@ const RFIDState = (props) => {
         grup: '',
 		qr: '',
 		cinsiyet: '',
+		mudurluk: '',
 		availableProducts : [],
-        basket: [/*'verilenadet': 3, 'istenilenadet': 3, 'per_isno': 22222, 'kull_isno': 11111, 'urun_id': 5*/],
+        basket: [],
 		loading: false,
 		isIdentificate: false
     };
@@ -33,37 +34,106 @@ const RFIDState = (props) => {
 	const handleRFin = (event, data) => {
 		event.preventDefault();
 		setLoading(true)
+
+		
+		
 		setTimeout(() => {
 			axios
-				.get(`http://localhost:8000/api/personellerRF/${data.rfid}/?format=json`)
-				.then(res => {
-					dispatch({
-						type: "GET_PERSONELWRFID",
-						payload: res.data
-					});
-					console.log(res.data)
-					return(axios.get(`http://localhost:8000/api/urunTeslim/?format=json&isno=${res.data.isno}`))
+			.get(`http://localhost:8000/api/personellerRF/${data.rfid}/?format=json`)
+			.then(res => {
+				dispatch({
+					type: "GET_PERSONELWRFID",
+					payload: res.data
+				});
+				let one =`http://localhost:8000/api/urunTeslim/?format=json&isno=${res.data.isno}`
+				let two = `http://localhost:8000/api/istihkakgrup/${res.data.grup}`;
+				let three =`http://localhost:8000/api/mudurluk/${res.data.mudurluk}`;
+				const requestOne = axios.get(one);
+				const requestTwo = axios.get(two);
+				const requestThree = axios.get(three);
+				console.log(res.data)
+				return(axios.all([requestOne, requestTwo, requestThree]))
 				})
-				.then(res => {
+				.then(axios.spread((...responses) => {
+
+					const responseOne = responses[0]
+				  
+					const responseTwo = responses[1]
+				  
+					const responseThree = responses[2]
+				  
 					dispatch({
 						type: "SET_PRODUCTS",
-						payload: res.data
+						payload: responseOne.data
+					})
+					dispatch({
+						type: "SET_GRUP",
+						payload: responseTwo.data.i_isim
+					})
+					dispatch({
+						type: "SET_MUDURLUK",
+						payload: responseThree.data.m_isim
 					})
 					setLoading(false)
+				}))
+				.catch(errors => {
+				  
+					// react on errors.
+				  
 				})
-		}, 3000);
+
+			// axios
+			// 	.get(`http://localhost:8000/api/personellerRF/${data.rfid}/?format=json`)
+			// 	.then(res => {
+			// 		dispatch({
+			// 			type: "GET_PERSONELWRFID",
+			// 			payload: res.data
+			// 		});
+			// 		console.log(res.data)
+			// 		return(axios.get(`http://localhost:8000/api/urunTeslim/?format=json&isno=${res.data.isno}`))
+			// 	})
+			// 	.then(res => {
+			// 		dispatch({
+			// 			type: "SET_PRODUCTS",
+			// 			payload: res.data
+			// 		})
+			// 		console.log(state.grup)
+			// 		return(axios.get(`http://localhost:8000/api/istihkakgrup/${state.grup}`))
+			// 	})
+			// 	.then(res => {
+			// 		dispatch({
+			// 			type: "SET_GRUP",
+			// 			payload: res.data.i_isim
+			// 		})
+			// 		console.log(state.mudurluk)
+			// 		return(axios.get(`http://localhost:8000/api/mudurluk/${state.mudurluk}`))
+			// 	})
+			// 	.then(res => {
+			// 		dispatch({
+			// 			type: "SET_MUDURLUK",
+			// 			payload: res.data.mudurluk
+			// 		})
+			// 		setLoading(false)
+			// 	})
+		}, 1000);
 		dispatch({
 			type: "SET_ISIDENTIFICATE",
 			payload: true
-		})
-		state.availableProducts.map((row) => {
-			row.push(0)
 		})
 	};
 
 	const handleQRin = (event, data) => {
 		event.preventDefault();
 		setLoading(true)
+
+		let one =`http://localhost:8000/api/urunTeslim/?format=json&isno=${state.isno}`
+		let two = `http://localhost:8000/api/istihkakgrup/${state.grup}`
+		let three =`http://localhost:8000/api/mudurluk/${state.mudurluk}`
+
+		const requestOne = axios.get(one);
+		const requestTwo = axios.get(two);
+		const requestThree = axios.get(three);
+
 		setTimeout(() => {
 			axios
 				.get(`http://localhost:8000/api/personellerQR/${data.tel}/?format=json`)
@@ -72,22 +142,46 @@ const RFIDState = (props) => {
 						type: "GET_PERSONELWQR",
 						payload: res.data
 					});
-					return(axios.get(`http://localhost:8000/api/urunTeslim/?format=json&isno=${res.data.isno}`))
+					let one =`http://localhost:8000/api/urunTeslim/?format=json&isno=${res.data.isno}`
+					let two = `http://localhost:8000/api/istihkakgrup/${res.data.grup}`;
+					let three =`http://localhost:8000/api/mudurluk/${res.data.mudurluk}`;
+					const requestOne = axios.get(one);
+					const requestTwo = axios.get(two);
+					const requestThree = axios.get(three);
+					console.log(res.data)
+					return(axios.all([requestOne, requestTwo, requestThree]))
 				})
-				.then(res => {
+				.then(axios.spread((...responses) => {
+
+					const responseOne = responses[0]
+					
+					const responseTwo = responses[1]
+					
+					const responseThree = responses[2]
+					
 					dispatch({
 						type: "SET_PRODUCTS",
-						payload: res.data
+						payload: responseOne.data
+					})
+					dispatch({
+						type: "SET_GRUP",
+						payload: responseTwo.data.i_isim
+					})
+					dispatch({
+						type: "SET_MUDURLUK",
+						payload: responseThree.data.m_isim
 					})
 					setLoading(false)
+				}))
+				.catch(errors => {
+				  
+					// react on errors.
+				  
 				})
-		}, 3000);
+		}, 1000);
 		dispatch({
 			type: "SET_ISIDENTIFICATE",
 			payload: true
-		})
-		state.availableProducts.map((row) => {
-			row.push(0)
 		})
 	};
 	
@@ -96,33 +190,51 @@ const RFIDState = (props) => {
 		setTimeout(() => {
 			axios
 				.get("http://localhost:8000/api/face_detect/")
-				.then(response => {
+				.then(res => {
 					dispatch({
 						type: "SET_ISNO",
-						payload: response.data.isno
+						payload: res.data.isno
 					})
-					return(axios.get(`http://localhost:8000/api/personellerFace/${response.data.isno}/?format=json`))
-				})
-				.then(response => {
-					console.log(response)
-					dispatch({
-						type: "GET_PERSONELWISNO",
-						payload: response.data
-					})
-					return(axios.get(`http://localhost:8000/api/urunTeslim/?format=json&isno=${response.data.isno}`))
+					return(axios.get(`http://localhost:8000/api/personellerFace/${res.data.isno}/?format=json`))
 				})
 				.then(res => {
 					dispatch({
-						type: "SET_PRODUCTS",
+						type: "GET_PERSONELWISNO",
 						payload: res.data
 					})
-					setLoading(false)
-					state.availableProducts.map((row) => {
-						row.push(0)
-					})
+					let one =`http://localhost:8000/api/urunTeslim/?format=json&isno=${res.data.isno}`
+					let two = `http://localhost:8000/api/istihkakgrup/${res.data.grup}`;
+					let three =`http://localhost:8000/api/mudurluk/${res.data.mudurluk}`;
+					const requestOne = axios.get(one);
+					const requestTwo = axios.get(two);
+					const requestThree = axios.get(three);
+					console.log(res.data)
+					return(axios.all([requestOne, requestTwo, requestThree]))
 				})
+				.then(axios.spread((...responses) => {
+
+					const responseOne = responses[0]
+					
+					const responseTwo = responses[1]
+					
+					const responseThree = responses[2]
+					
+					dispatch({
+						type: "SET_PRODUCTS",
+						payload: responseOne.data
+					})
+					dispatch({
+						type: "SET_GRUP",
+						payload: responseTwo.data.i_isim
+					})
+					dispatch({
+						type: "SET_MUDURLUK",
+						payload: responseThree.data.m_isim
+					})
+					setLoading(false)
+				}))
 				.catch(error => console.log(error.response))
-		}, 3000);
+		}, 1000);
 		dispatch({
 			type: "SET_ISIDENTIFICATE",
 			payload: true
@@ -155,6 +267,7 @@ const RFIDState = (props) => {
 				rfid: '',
 				grup: '',
 				cinsiyet: '',
+				mudurluk: '',
 				availableProducts : [],
 				basket: [],
 				isIdentificate: false
@@ -169,7 +282,8 @@ const RFIDState = (props) => {
     }
 
     const postBasket = () => {
-        axios.post('http://localhost:8000/api/urunHareketler/',state.basket, options)
+		console.log(state.basket)
+        axios.post('http://localhost:8000/api/urunHareketler/',JSON.stringify(state.basket), options)
             .then(res => res.json())
             .then(json => {
                     console.log(json)
@@ -203,8 +317,8 @@ const RFIDState = (props) => {
 			tel: state.tel,
 			rfid: state.rfid,
 			grup: state.grup,
-			faceid: state.faceid,
 			cinsiyet: state.cinsiyet,
+			mudurluk: state.mudurluk,
 			isIdentificate: state.isIdentificate,
 			availableProducts: state.availableProducts,
 			basket: state.basket,

@@ -8,6 +8,8 @@ import RFIDContext from '../../contexts/rfid/rfidContext';
 import AlertContext from '../../contexts/alert/alertContext';
 import Alert1 from '../Alert';
 import LoginContext from '../../contexts/login/loginContext';
+import Grid from '@material-ui/core/Grid';
+
 //Material-UI
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -76,14 +78,6 @@ const AvailableProductsTable = (props) => {
     const classes = useStyles();
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
-    // const { setAlert } = useContext(AlertContext);
-
-    const [item, setItem] = React.useState(0);
-
-    // const handleChange = (event) => {
-    //   setAge(event.target.value);
-    // };
-
     const addBasketItem = (urunid, name, istenilen, amount ) => {
         if(props.basketData.some(item => urunid === item.urun_id)){ 
             console.log('alert')
@@ -102,13 +96,13 @@ const AvailableProductsTable = (props) => {
         }
     }
 
-    var adet;
+    // var adet;
 
-    const handleAdetChange = (event, row) => {
-        event.preventDefault();
-        setItem(event.target.value)
-        row[3] = event.target.value
-    }
+    // const handleAdetChange = (event, row) => {
+    //     event.preventDefault();
+    //     setItem(event.target.value)
+    //     row[3] = event.target.value
+    // }
 
     var menuItem = [];
 
@@ -125,12 +119,14 @@ const AvailableProductsTable = (props) => {
     return (
         <React.Fragment>
             <Title>Alınabilecek Ürünler</Title>
+            <Grid container>
                 <Table size="small">
                     <TableHead>
                         <TableRow>
                             <TableCell>Ürün</TableCell>
                             <TableCell>Alınabilecek Adet</TableCell>
-                            <TableCell>Teslim Edilecek Adet</TableCell>
+                            <TableCell></TableCell>
+                            {/* <TableCell>Teslim Edilecek Adet</TableCell> */}
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -138,7 +134,7 @@ const AvailableProductsTable = (props) => {
                             <TableRow key={row[0]}>
                                 <TableCell>{row[1]}</TableCell>
                                 <TableCell>{row[2]}</TableCell>
-                                <TableCell>
+                                {/* <TableCell>
                                     <FormControl className={classes.formControl} >
                                         <InputLabel id="demo-simple-select-label"></InputLabel>
                                         <Select
@@ -155,7 +151,7 @@ const AvailableProductsTable = (props) => {
                                             </div>
                                         </Select>
                                     </FormControl>
-                                    {/* <TextField
+                                    <TextField
                                     onChange={(e) => {
                                         if(e.target.value > row[2] || e.target.value < 0){
                                             console.log(e.target.value)
@@ -164,15 +160,15 @@ const AvailableProductsTable = (props) => {
                                     }}
                                     value={adet}
                                     variant="outlined"
-                                    requireds
+                                    required
                                     id="adet"
                                     label="İstenilen Adet"
                                     name="adet"
                                     defaultValue={row[2]}
-                                    /> */}
-                                </TableCell>
+                                    />
+                                </TableCell> */}
                                 <TableCell>
-                                    <Button variant="contained" color="primary" onClick={() => addBasketItem(row[0], row[1], row[2], row[3])} >
+                                    <Button variant="contained" color="primary" onClick={() => addBasketItem(row[0], row[1], row[2], row[2])} >
                                         Ekle
                                     </Button>
                                 </TableCell>
@@ -180,10 +176,11 @@ const AvailableProductsTable = (props) => {
                         ))}
                     </TableBody>
                 </Table>
+                </Grid>
                 <div className={classes.seeMore}>
-                    <Link color="primary" href="#" onClick={preventDefault}>
+                    {/* <Link color="primary" href="#" onClick={preventDefault}>
                         See more orders
-                    </Link>
+                    </Link> */}
                 </div>
                 
         </React.Fragment>

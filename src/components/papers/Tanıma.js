@@ -41,8 +41,6 @@ const useStyles = makeStyles((theme) => ({
 		display: 'flex',
 		overflow: 'auto',
 		flexDirection: 'column',
-		width: '%100',
-		height: '%100'
 	},
 	fixedHeight: {
 		height: 240,
@@ -77,6 +75,8 @@ const Tanıma = () => {
 		handleQRin(event, {
 			tel: realtel
 		})
+
+		event.target.value = ''
 		history.push(`/urunteslimdetay`)
 	}
 
@@ -84,11 +84,11 @@ const Tanıma = () => {
 		<div className={classes.root}>
 			<main className={classes.content}>
 			  	<div className={classes.appBarSpacer} />
-			  	<Container maxWidth="lg" className={classes.container}>
-					<Paper className={classes.paper} style={{}}>
-						<Grid container spacing={3} className={classes.root} >
+			  	<Container className={classes.container}>
+					<Paper className={classes.paper}>
+						<Grid container spacing={3} style={{display: 'flex'}}>
 						{/*Tanıma*/}
-							<Grid item >
+							<Grid item>
 								<React.Fragment>
 									<Title>Tanıma Yöntemleri</Title>
 										<Grid container spacing={3}>
@@ -126,6 +126,7 @@ const Tanıma = () => {
 																				handleRFin(event, {
 																					rfid: rfid
 																				})
+																				event.target.value = ''
 																				history.push(`/urunteslimdetay`)
 																			} 
 																		}}

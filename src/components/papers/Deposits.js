@@ -19,17 +19,17 @@ export default function Deposits() {
     
     return (
         <React.Fragment>
-            <Title>Recent Deposits</Title>
+            <Title>Ürün Tutarı</Title>
             <Typography component="p" variant="h4">
-                $3,024.00
+                €&nbsp;3,024.00
             </Typography>
             <Typography color="textSecondary" className={classes.depositContext}>
-                on 15 March, 2019
+                1 Mart'tan itibaren
             </Typography>
             <div>
-                <Link color="primary" href="#" onClick={preventDefault}>
+                {/* <Link color="primary" href="#" onClick={preventDefault}>
                     View balance
-                </Link>
+                </Link> */}
             </div>
         </React.Fragment>
     );

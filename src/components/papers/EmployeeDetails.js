@@ -52,7 +52,7 @@ const EmployeeDetails = () => {
 	const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 	const tanimaPaper = clsx(classes.paper, classes.tanimaHeight);
 
-	const { rfid, isno, tel, email, isim, soyisim, cinsiyet, grup, isIdentificate, handleRFin, handleRFChange, handleOut } = useContext(RFIDContext)
+	const { rfid, isno, tel, email, isim, soyisim, cinsiyet, grup, mudurluk, isIdentificate, handleRFin, handleRFChange, handleOut } = useContext(RFIDContext)
 
 	function goBack() {
 		handleOut();
@@ -81,7 +81,7 @@ const EmployeeDetails = () => {
 					<Grid item xs={12} md={4} lg={4} xl={4}>
 						<i class="fas fa-user-shield fa-lg"> : {isno}</i>
 						<div style={{margin: '20px'}}></div>
-						<i class="fas fa-users fa-lg"> : {grup}</i>
+						<i class="fas fa-users fa-lg"> : {mudurluk} / {grup}</i>
 					</Grid>
 					<Grid item xs={12} md={4} lg={4} xl={4}>
 						<i class="fas fa-id-card fa-lg"> : {rfid}</i>

@@ -102,7 +102,7 @@ const LoginScreen = () => {
 								required
 								fullWidth
 								name="password"
-								label="Password"
+								label="Şifre"
 								type="password"
 								id="password"
 								autoComplete="current-password"

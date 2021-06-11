@@ -62,8 +62,6 @@ const LoginState = (props) => {
 			})
 			.catch(err => console.log(err));
 		}
-		if(state.isLogin){
-		}
 	}
 
 	const handleLogin = (e, data) => {
@@ -100,7 +98,7 @@ const LoginState = (props) => {
 					})
 					setLoading(false)
 				})
-		}, 3000);
+		}, 1000);
 	};
 
 	const handleLoginChange = event => {
