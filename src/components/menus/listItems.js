@@ -25,7 +25,7 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Ürün Teslim" />
     </ListItem>
-    <ListItem button>
+    {/* <ListItem button>
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
@@ -42,20 +42,20 @@ export const mainListItems = (
         <LayersIcon />
       </ListItemIcon>
       <ListItemText primary="Integrations" />
-    </ListItem>
+    </ListItem> */}
   </div>
 );
 
 export const secondaryListItems = (
   <div>
-    <ListSubheader inset>Saved reports</ListSubheader>
+    <ListSubheader inset>FORMLAR</ListSubheader>
     <ListItem button component={Link} to="/yuztanitma">
       <ListItemIcon>
         <i class="fas fa-user-plus fa-lg"></i>
       </ListItemIcon>
       <ListItemText primary="Yüz Tanıtma" />
     </ListItem>
-    <ListItem button>
+    {/* <ListItem button>
       <ListItemIcon>
         <AssignmentIcon />
       </ListItemIcon>
@@ -66,6 +66,6 @@ export const secondaryListItems = (
         <AssignmentIcon />
       </ListItemIcon>
       <ListItemText primary="Year-end sale" />
-    </ListItem>
+    </ListItem> */}
   </div>
 );
