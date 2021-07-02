@@ -4,7 +4,6 @@ import Copyright from "../Copyright";
 import Title from "../Title"
 import RFIDContext from "../../contexts/rfid/rfidContext";
 // MaterialUI
-import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
@@ -14,10 +13,6 @@ import Button from '@material-ui/core/Button';
 import Popover from '@material-ui/core/Popover';
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
 import TextField from '@material-ui/core/TextField';
-import { useTheme } from '@material-ui/core/styles';
-
-
-const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -52,17 +47,10 @@ const useStyles = makeStyles((theme) => ({
 
 
 const Tanıma = () => {
-	const theme = useTheme();
 	const classes = useStyles();
 	const history = useHistory();
 
-	const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-	const tanimaPaper = clsx(classes.paper, classes.tanimaHeight);
-
-	const { rfid, qr, handleIDin, handleRFin, handleQRin, handleRFChange, handleQRChange } = useContext(RFIDContext)
-	function goNext(keyword) {
-		history.push(`/urunteslim/${keyword}`)
-	}
+	const { rfid, qr, handleIDin, handleRFin, handleQRin, handleRFChange } = useContext(RFIDContext)
 
 	const [QRChange, setQRChange] = useState('')
 

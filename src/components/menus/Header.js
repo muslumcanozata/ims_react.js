@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import LoginContext from '../../contexts/login/loginContext'
 import OpenSelectedContext from '../../contexts/open/openContext';
 import Logout from './Logout'
 //MaterialUI
@@ -97,7 +96,6 @@ const useStyles = makeStyles((theme) => ({
 
 
 const Header = () => {
-  	const { handleLogout } = useContext(LoginContext)
 	const { open, handleDrawerOpen } = useContext(OpenSelectedContext)
 
 	const classes = useStyles();

@@ -1,28 +1,11 @@
 import React, { useEffect, useContext } from "react";
-import { Link, useHistory, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import LoginContext from '../../contexts/login/loginContext';
-import RFIDContext from '../../contexts/rfid/rfidContext';
 import Sidebar from '../menus/Sidebar';
 import Header from '../menus/Header';
 import Tanıma from '../papers/Tanıma';
 // MaterialUI
-import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-
-function Copyright() {
-    return (
-     	<Typography variant="body2" color="textSecondary" align="center">
-        	{'© '}
-        	<Link color="inherit" href="http://localhost:3000/">
-          		Industrial Material Delivery System
-        	</Link>
-			{' '}
-        	{new Date().getFullYear()}
-        	{'.'}
-      	</Typography>
-    );
-}
 
 const drawerWidth = 240;
 
@@ -102,12 +85,8 @@ const useStyles = makeStyles((theme) => ({
 
 const UrunTeslimPage = () => {
     const { isLogin, didMount } = useContext(LoginContext)
-	const { rfid, isIdentificate } = useContext(RFIDContext)
 
-	const history = useHistory();
 	const classes = useStyles();
-
-	const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
 	useEffect(( ) => {
 		didMount();

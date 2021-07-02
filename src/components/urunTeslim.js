@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import Copyright from "./Copyright";
 // MaterialUI
-import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Box from '@material-ui/core/Box';
@@ -13,8 +12,6 @@ import EmployeeDetails from "./papers/EmployeeDetails";
 import Basket from "./papers/basket";
 import RFIDContext from "../contexts/rfid/rfidContext";
 import Loading from "./loading/Loading";
-
-const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -47,7 +44,6 @@ const UrunTeslim = () => {
 	const [basketData, setBasketData] = useState([]);
 
 	const classes = useStyles();
-	const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
 	const {loading} = useContext(RFIDContext)
 

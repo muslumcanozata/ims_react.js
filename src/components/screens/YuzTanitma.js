@@ -1,13 +1,11 @@
 import React, { useEffect, useContext } from "react";
 import { Redirect } from "react-router-dom";
 import LoginContext from '../../contexts/login/loginContext'
-import OpenContext from '../../contexts/open/openContext';
 import Sidebar from '../menus/Sidebar';
 import Header from '../menus/Header';
 import Loading from '../loading/Loading'
 import YuzTanitmaForm from '../papers/YuzTanitmaForm';
 //MaterialUI
-import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 
 const drawerWidth = 240;
@@ -93,12 +91,9 @@ const useStyles = makeStyles((theme) => ({
 
 
 const YuzTanitma = () => {
-  	const { handleLogout, didMount, isLogin, loading } = useContext(LoginContext)
-	const { open, selected, setSelected, handleDrawerOpen, handleDrawerClose } = useContext(OpenContext)
+  	const { isLogin, loading } = useContext(LoginContext)
 
 	const classes = useStyles();
-
-	const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
 	useEffect(( ) => {
 		// didMount();

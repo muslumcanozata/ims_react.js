@@ -1,10 +1,8 @@
 import React, { useContext,useState } from "react";
-import { useHistory } from "react-router-dom";
 import Copyright from "../Copyright";
 import Title from "../Title"
 import RFIDContext from "../../contexts/rfid/rfidContext";
 // MaterialUI
-import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
@@ -12,10 +10,6 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import { useTheme } from '@material-ui/core/styles';
-
-
-const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -60,18 +54,9 @@ const useStyles = makeStyles((theme) => ({
 
 
 const Tanıma = () => {
-	const theme = useTheme();
 	const classes = useStyles();
-	const history = useHistory();
-
-	const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-	const tanimaPaper = clsx(classes.paper, classes.tanimaHeight);
 
 	const { setFaceID } = useContext(RFIDContext)
-
-    function goNext(keyword) {
-		history.push(`/urunteslim/${keyword}`)
-	}
 	
 	const handleChange = (event) => {
 		setIsno(event.target.value)

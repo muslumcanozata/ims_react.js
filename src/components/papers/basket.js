@@ -1,6 +1,4 @@
 import React, { useContext } from 'react';
-import Link from '@material-ui/core/Link';
-import { BasketItem } from '../../models/basketItem'
 import RFIDContext from '../../contexts/rfid/rfidContext';
 import Title from '../Title';
 import Grid from '@material-ui/core/Grid';
@@ -12,11 +10,6 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
-
-
-function preventDefault(event) {
-    event.preventDefault();
-}
 
 const useStyles = makeStyles((theme) => ({
     seeMore: {

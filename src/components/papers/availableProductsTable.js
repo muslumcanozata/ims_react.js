@@ -1,12 +1,8 @@
 import React, { useContext } from 'react';
-import Link from '@material-ui/core/Link';
-import clsx from 'clsx';
 import Title from '../Title';
 import { BasketItem } from '../../models/basketItem'
 import { PostItem } from '../../models/postItem';
 import RFIDContext from '../../contexts/rfid/rfidContext';
-import AlertContext from '../../contexts/alert/alertContext';
-import Alert1 from '../Alert';
 import LoginContext from '../../contexts/login/loginContext';
 import Grid from '@material-ui/core/Grid';
 
@@ -18,17 +14,13 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
-import MenuItem from "@material-ui/core/MenuItem";
-import Snackbar from '@material-ui/core/Snackbar';
-import Alert from '@material-ui/lab/Alert';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import { EventSeat } from '@material-ui/icons';
-
-function preventDefault(event) {
-    event.preventDefault();
-}
+// import MenuItem from "@material-ui/core/MenuItem";
+// import Snackbar from '@material-ui/core/Snackbar';
+// import Alert from '@material-ui/lab/Alert';
+// import InputLabel from '@material-ui/core/InputLabel';
+// import FormControl from '@material-ui/core/FormControl';
+// import Select from '@material-ui/core/Select';
+// import { EventSeat } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
     seeMore: {
@@ -76,7 +68,6 @@ const AvailableProductsTable = (props) => {
     const { availableProducts, basket, setBasket, isno } = useContext(RFIDContext)
     const { username } = useContext(LoginContext)
     const classes = useStyles();
-    const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
     const addBasketItem = (urunid, name, istenilen, amount ) => {
         if(props.basketData.some(item => urunid === item.urun_id)){ 
@@ -104,17 +95,17 @@ const AvailableProductsTable = (props) => {
     //     row[3] = event.target.value
     // }
 
-    var menuItem = [];
+    // var menuItem = [];
 
-    const menuItems = (row) => {
-        for(var i=1; i<=row; i++){
-            menuItem.push(<MenuItem value={i}>{i}</MenuItem>)
-        }
-    }
+    // const menuItems = (row) => {
+    //     for(var i=1; i<=row; i++){
+    //         menuItem.push(<MenuItem value={i}>{i}</MenuItem>)
+    //     }
+    // }
 
-    const dropItems = () => {
-        menuItem = [];
-    }
+    // const dropItems = () => {
+    //     menuItem = [];
+    // }
 
     return (
         <React.Fragment>

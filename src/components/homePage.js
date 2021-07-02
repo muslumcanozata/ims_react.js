@@ -11,8 +11,6 @@ import Paper from '@material-ui/core/Paper';
 import Chart from './papers/Chart';
 import Deposits from './papers/Deposits';
 
-const drawerWidth = 240;
-
 const useStyles = makeStyles((theme) => ({
 	root: {
 		display: 'flex',

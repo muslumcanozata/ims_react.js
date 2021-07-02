@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import LoginContext from '../../contexts/login/loginContext';
-import clsx from 'clsx';
 //Material-UI
 import Button from '@material-ui/core/Button';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
@@ -53,7 +52,7 @@ export default function MenuListComposition() {
 	const { firstName, lastName, handleLogout } = useContext(LoginContext);
   const { handleDrawerClose } = useContext(OpenContext);
 
-	const fixedAvatarClass = clsx(classes.orange, classes.small);
+	// const fixedAvatarClass = clsx(classes.orange, classes.small);
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);

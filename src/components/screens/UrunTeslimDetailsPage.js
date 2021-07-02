@@ -1,14 +1,11 @@
 import React, { useContext, useEffect } from 'react'
-import { useHistory, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import RFIDContext from '../../contexts/rfid/rfidContext';
 import LoginContext from '../../contexts/login/loginContext';
 import Header from '../menus/Header';
 import Sidebar from '../menus/Sidebar';
 import UrunTeslim from '../urunTeslim';
-import Alert1 from '../Alert';
-
 //Material-UI
-import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 
 const drawerWidth = 240;
@@ -96,7 +93,6 @@ const UrunTeslimDetailsPage = () => {
     const { isIdentificate } = useContext(RFIDContext)
     const { didMount, isLogin } = useContext(LoginContext)
 
-    const history = useHistory();
 	const classes = useStyles();
 
 	useEffect(() => {
