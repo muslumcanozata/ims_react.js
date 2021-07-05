@@ -7,6 +7,7 @@ import Home from './components/screens/Home';
 import UrunTeslimPage from "./components/screens/UrunTeslimPage";
 import UrunTeslimDetailsPage from "./components/screens/UrunTeslimDetailsPage.js";
 import YuzTanitma from './components/screens/YuzTanitma'
+import MateryalTeslim from './components/screens/MateryalTeslim';
 
 const App = () => {
 	const { didMount } = useContext(LoginContext);
@@ -17,7 +18,6 @@ const App = () => {
 
 	return (
 		<>
-			
 			<BrowserRouter>
 				<Switch>
 					<Route path="/" exact component={Home}></Route>
@@ -26,7 +26,8 @@ const App = () => {
 					<Route path="/urunteslim" exact component={UrunTeslimPage}></Route>
 					<Route path="/urunteslimdetay" exact component={UrunTeslimDetailsPage}></Route>
 					<Route path="/yuztanitma" exact component={YuzTanitma}></Route>
-					</Switch>
+					<Route path="/materyalteslim" exact component={MateryalTeslim}></Route>
+				</Switch>
 			</BrowserRouter>
 		</>
 	);
