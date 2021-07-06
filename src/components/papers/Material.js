@@ -53,8 +53,13 @@ const useStyles = makeStyles((theme) => ({
  		height: 120,
 	},
 	heading: {
-		fontSize: theme.typography.pxToRem(20),
-		fontWeight: theme.typography.fontWeightBold,
+		fontSize: theme.typography.pxToRem(15),
+		flexBasis: '33.33%',
+		flexShrink: 0,
+	},
+	secondaryHeading: {
+		fontSize: theme.typography.pxToRem(15),
+		color: theme.palette.text.secondary,
 	},
 }));
 
@@ -82,7 +87,8 @@ const Material = () => {
 												aria-controls="panel1a-content"
 												id="panel1a-header"
 												>
-													<Typography className={classes.heading}>4543143684</Typography>
+													<Typography className={classes.heading}>77777-43684</Typography>
+													<Typography className={classes.secondaryHeading}>Süleyman Çamurlu</Typography>
 												</AccordionSummary>
 												<AccordionDetails>
 													<Grid item xs={12} md={4} lg={4} xl={4}>
@@ -114,6 +120,8 @@ const Material = () => {
 												id="panel2a-header"
 												>
 													<Typography className={classes.heading}>Accordion 2</Typography>
+													<Typography className={classes.secondaryHeading}>Süleyman Çamurlu</Typography>
+
 												</AccordionSummary>
 												<AccordionDetails>
 													<Typography>
@@ -124,7 +132,7 @@ const Material = () => {
 											</Accordion>
 										</Grid>
 								</React.Fragment>
-							</Grid>
+						</Grid>
 					</Paper>
 					<Box pt={4}>
 						<Copyright />
