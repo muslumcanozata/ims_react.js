@@ -84,7 +84,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const UrunTeslimPage = () => {
+const MateryalTeslim = () => {
     const { isLogin, didMount } = useContext(LoginContext)
 
 	const classes = useStyles();
@@ -107,4 +107,4 @@ const UrunTeslimPage = () => {
 	);
 }
 
-export default UrunTeslimPage;
+export default MateryalTeslim;

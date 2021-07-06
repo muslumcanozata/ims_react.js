@@ -18,6 +18,12 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Divider from '@material-ui/core/Divider';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -53,27 +59,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const Tanıma = () => {
+const Material = () => {
 	const classes = useStyles();
-	const history = useHistory();
 
-	const { rfid, qr, handleIDin, handleRFin, handleQRin, handleRFChange } = useContext(RFIDContext)
+	const [data, setData] = useState({});
 
-	const [QRChange, setQRChange] = useState('')
-
-	function handleRegEx(event, data){
-		var str = data.tel;
-		var result = str.match(/CELL:\s*([^\n\r]*)/g);
-		var ds1 = result[0];
-		var realtel = ds1.slice(5, 16);
-
-		handleQRin(event, {
-			tel: realtel
-		})
-
-		event.target.value = ''
-		history.push(`/urunteslimdetay`)
-	}
 
     return (
 		<div className={classes.root}>
@@ -81,12 +71,11 @@ const Tanıma = () => {
 			  	<div className={classes.appBarSpacer} />
 			  	<Container className={classes.container}>
 					<Paper className={classes.paper}>
-						<Grid container spacing={3} style={{display: 'flex'}}>
-						{/*Accordion*/}
-							<Grid item>
+						<Grid item>
+						{/*Accordion*/}						
 								<React.Fragment>
 									<Title>Bekleyen Siparişler</Title>
-										<Grid container >
+										<Grid item>
 											<Accordion >
 												<AccordionSummary
 												expandIcon={<ExpandMoreIcon />}
@@ -114,13 +103,10 @@ const Tanıma = () => {
 															Teslim Et
 														</Button>
 													</Grid>
-													<Grid>
-														{/* Ürün Listesi */}
-													</Grid>
 												</AccordionDetails>
 											</Accordion>
 										</Grid>
-										<Grid container>
+										<Grid item >
 											<Accordion>
 												<AccordionSummary
 												expandIcon={<ExpandMoreIcon />}
@@ -139,7 +125,6 @@ const Tanıma = () => {
 										</Grid>
 								</React.Fragment>
 							</Grid>
-						</Grid>
 					</Paper>
 					<Box pt={4}>
 						<Copyright />
@@ -150,4 +135,4 @@ const Tanıma = () => {
 	);
 }
 
-export default Tanıma;
+export default Material;
