@@ -27,7 +27,6 @@ import TableRow from '@material-ui/core/TableRow';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
-		display: 'flex',
 	},
 	title: {
 		flexGrow: 1,
@@ -65,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const Material = () => {
+const StokTakip = () => {
 	const classes = useStyles();
 
 	const [data, setData] = useState({});
@@ -145,4 +144,4 @@ const Material = () => {
 	);
 }
 
-export default Material;
+export default StokTakip;

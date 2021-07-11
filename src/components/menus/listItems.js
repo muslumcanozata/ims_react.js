@@ -29,15 +29,15 @@ export const mainListItems = (
       <ListItemIcon>
         <i class="fad fa-box-check fa-lg"></i>
       </ListItemIcon>
-      <ListItemText primary="Customers" />
+      <ListItemText primary="Materyal Teslim" />
+    </ListItem>
+    <ListItem button component={Link} to="/stoktakip">
+      <ListItemIcon >
+        <i class="fas fa-layer-group fa-lg"></i>
+      </ListItemIcon>
+      <ListItemText primary="Stok Takip" />
     </ListItem>
     {/*<ListItem button>
-      <ListItemIcon>
-        <BarChartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Reports" />
-    </ListItem>
-    <ListItem button>
       <ListItemIcon>
         <LayersIcon />
       </ListItemIcon>
