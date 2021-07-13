@@ -13,18 +13,7 @@ import Button from '@material-ui/core/Button';
 import Popover from '@material-ui/core/Popover';
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
 import TextField from '@material-ui/core/TextField';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Divider from '@material-ui/core/Divider';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-
+import { DataGrid } from '@material-ui/data-grid';
 const useStyles = makeStyles((theme) => ({
 	root: {
 	},
@@ -67,72 +56,74 @@ const useStyles = makeStyles((theme) => ({
 const StokTakip = () => {
 	const classes = useStyles();
 
-	const [data, setData] = useState({});
+	const columns = [
+		{ field: 'id', headerName: 'ID', width: 70 },
+		{ field: 'firstName', headerName: 'First name', width: 130 },
+		{ field: 'lastName', headerName: 'Last name', width: 130 },
+		{
+		  field: 'age',
+		  headerName: 'Age',
+		  type: 'number',
+		  width: 90,
+		},
+		{
+			field: 'fullName',
+			headerName: 'Full name',
+			description: 'This column has a value getter and is not sortable.',
+			sortable: false,
+			width: 160,
+			valueGetter: (params) =>
+				`${params.getValue(params.id, 'firstName') || ''} ${
+				params.getValue(params.id, 'lastName') || ''
+				}`,
+		},
+	];
 
+	const rows = [
+		{ id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
+		{ id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
+		{ id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
+		{ id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
+		{ id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
+		{ id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
+		{ id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
+		{ id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
+		{ id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
+	];
 
     return (
 		<div className={classes.root}>
 			<div className={classes.content}>
 			  	<div className={classes.appBarSpacer} />
 			  	<Container className={classes.container}>
-					
 						<Grid item>
 						{/*Accordion*/}						
 								<React.Fragment>
+									<div style={{}}>
 									<Paper className={classes.paper}>
-										<Title>Bekleyen Siparişler</Title>
+										<Grid container>
+										<Grid item xs={12} md={6} lg={8} xl={8} style={{marginTop:'10px'}}>
+											<Title >Stok Takip Ekranı</Title>
+										</Grid>
+										<Grid item style={{}} xs={12} md={6} lg={4} xl={4} >
+											<TextField id="outlined-search" label="SKU Giriniz" type="search" variant="outlined" />
+										</Grid>
+										</Grid>
 									</Paper >
-										<Grid item>
-											<Accordion style={{marginTop: '20px'}}>
-												<AccordionSummary
-												expandIcon={<ExpandMoreIcon />}
-												aria-controls="panel1a-content"
-												id="panel1a-header"
-												>
-													<Typography className={classes.heading}>77777-43684</Typography>
-													<Typography className={classes.secondaryHeading}>Süleyman Çamurlu</Typography>
-												</AccordionSummary>
-												<AccordionDetails>
-													<Grid item xs={12} md={4} lg={4} xl={4}>
-														<i class="fas fa-mars fa-lg"> : Süleyman Çamurlu</i>
-														<div style={{margin: '20px'}}></div>
-														<i class="fas fa-phone-square-alt fa-lg"> : 536 637 6862</i>
-													</Grid>
-													<Grid item xs={12} md={4} lg={4} xl={4}>
-														<i class="fas fa-user-shield fa-lg"> : 77777</i>
-														<div style={{margin: '20px'}}></div>
-														<i class="fas fa-users fa-lg"> : Pres</i>
-													</Grid>
-													<Grid item xs={12} md={4} lg={4} xl={4}>
-														<i class="fas fa-id-card fa-lg"> : 0974280964</i>
-														<div style={{margin: '15px'}}></div>
-														<Button onClick={() => {}} 	variant="contained" color="primary" 		
-														>
-															Teslim Et
-														</Button>
-													</Grid>
-												</AccordionDetails>
-											</Accordion>
-										</Grid>
-										<Grid item >
-											<Accordion>
-												<AccordionSummary
-												expandIcon={<ExpandMoreIcon />}
-												aria-controls="panel2a-content"
-												id="panel2a-header"
-												>
-													<Typography className={classes.heading}>Accordion 2</Typography>
-													<Typography className={classes.secondaryHeading}>Süleyman Çamurlu</Typography>
-
-												</AccordionSummary>
-												<AccordionDetails>
-													<Typography>
-														Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-														sit amet blandit leo lobortis eget.
-													</Typography>
-												</AccordionDetails>
-											</Accordion>
-										</Grid>
+									</div>
+									<div style={{marginTop: '20px'}}>
+										<Paper className={classes.paper}>
+											<div style={{ height: 400, width: '100%' }}>
+												<DataGrid
+													rows={rows}
+													columns={columns}
+													pageSize={5}
+													checkboxSelection
+													disableSelectionOnClick
+												/>
+											</div>
+										</Paper>
+									</div>
 								</React.Fragment>
 						</Grid>
 					<Box pt={4}>

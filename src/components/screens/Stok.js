@@ -33,6 +33,7 @@ const Stok = () => {
 				<Header />
 				<Sidebar />
 				<StokTakip />
+				
 			</div>))
   		:
 		<Redirect to="/anasayfa" />
