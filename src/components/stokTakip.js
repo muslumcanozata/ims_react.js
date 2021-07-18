@@ -7,11 +7,7 @@ import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import AvailableProductsTable from "./papers/urunTeslim/availableProductsTable";
-import EmployeeDetails from "./papers/urunTeslim/EmployeeDetails";
-import Basket from "./papers/urunTeslim/basket";
-import RFIDContext from "../contexts/rfid/rfidContext";
-import Loading from "./loading/Loading";
+
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -39,27 +35,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const UrunTeslim = () => {
-	//AVAILABLE PRODUCTTAN ALD IĞIN DATAYI STATE TE TUT VE BASKET'E YOLLA
-	const [basketData, setBasketData] = useState([]);
-
+const stokTakip = () => {
 	const classes = useStyles();
-
-	const {loading} = useContext(RFIDContext)
-
-	if(loading) return(
-		<div className={classes.root}>
-			<CssBaseline />
-			<main className={classes.content}>
-				<div className={classes.appBarSpacer} />
-				<Container maxWidth="lg" className={classes.container}>
-					<Grid container spacing={3}>
-						<Loading/>
-					</Grid>
-				</Container>
-			</main>
-		</div>
-	)
 
   	return (
 		<div className={classes.root}>
@@ -68,23 +45,22 @@ const UrunTeslim = () => {
 			  	<div className={classes.appBarSpacer} />
 			  	<Container maxWidth="lg" className={classes.container}>
 					<Grid container spacing={3}>
-						{/* Personel */}
+						{/* StokTakip Title */}
 						<Grid item xs={12} md={12} lg={12}>
 							<Paper className={classes.paper}>
-                                <EmployeeDetails />
+                                <StokTakipTitle/>
 							</Paper>
 						</Grid>
 						{/* Alınabilecek Ürünler */}
 						<Grid item xs={12} md={12} lg={12}>
 							<Paper className={classes.paper}>
-                                <AvailableProductsTable basketData={basketData} setBasketData={setBasketData}/>
+
 							</Paper>
 						</Grid>
 						{/* Sepet */}
 						<Grid item xs={12} md={12} lg={12}>
 							<Paper className={classes.paper}>
-								{/*Basket Datayı Props Olarak Ver ve Renderla*/} 
-                                <Basket basketData={basketData} setBasketData={setBasketData}/>
+
 							</Paper>
 						</Grid>
 					</Grid>
@@ -97,4 +73,4 @@ const UrunTeslim = () => {
 	);
 };
 
-export default UrunTeslim;
+export default stokTakip;

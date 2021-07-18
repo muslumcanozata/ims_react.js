@@ -1,7 +1,7 @@
 import React, { useContext,useState } from "react";
-import Copyright from "../Copyright";
-import Title from "../Title"
-import RFIDContext from "../../contexts/rfid/rfidContext";
+import Copyright from "../../Copyright";
+import Title from "../../Title"
+import RFIDContext from "../../../contexts/rfid/rfidContext";
 // MaterialUI
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';

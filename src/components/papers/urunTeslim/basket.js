@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import RFIDContext from '../../contexts/rfid/rfidContext';
-import Title from '../Title';
+import RFIDContext from '../../../contexts/rfid/rfidContext';
+import Title from '../../Title';
 import Grid from '@material-ui/core/Grid';
 //Material-UI
 import { makeStyles } from '@material-ui/core/styles';

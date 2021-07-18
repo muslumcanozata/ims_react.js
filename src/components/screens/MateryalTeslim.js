@@ -3,7 +3,7 @@ import { Redirect } from "react-router-dom";
 import LoginContext from '../../contexts/login/loginContext';
 import Sidebar from '../menus/Sidebar';
 import Header from '../menus/Header';
-import Material from '../papers/Material';
+import Material from '../material';
 // MaterialUI
 import { makeStyles } from '@material-ui/core/styles';
 

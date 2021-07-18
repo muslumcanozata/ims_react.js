@@ -3,7 +3,7 @@ import { Redirect } from "react-router-dom";
 import LoginContext from '../../contexts/login/loginContext';
 import Sidebar from '../menus/Sidebar';
 import Header from '../menus/Header';
-import StokTakip from '../papers/StokTakip';
+import StokTakip from '../papers/stokTakip/StokTakip';
 // MaterialUI
 import { makeStyles } from '@material-ui/core/styles';
 

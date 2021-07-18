@@ -1,8 +1,7 @@
 import React, { useContext,useState } from "react";
 import { useHistory } from "react-router-dom";
-import Copyright from "../Copyright";
-import Title from "../Title"
-import RFIDContext from "../../contexts/rfid/rfidContext";
+import Copyright from "../../Copyright";
+import Title from "../../Title"
 // MaterialUI
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
@@ -81,46 +80,39 @@ const StokTakip = () => {
 	];
 
     return (
-		<div className={classes.root}>
-			<div className={classes.content}>
-			  	<div className={classes.appBarSpacer} />
-			  	<Container className={classes.container}>
-						<Grid item>
-						{/*Accordion*/}						
-								<React.Fragment>
-									<div style={{}}>
-									<Paper className={classes.paper}>
-										<Grid container>
-										<Grid item xs={12} md={6} lg={8} xl={8} style={{marginTop:'10px'}}>
-											<Title >Stok Takip Ekranı</Title>
-										</Grid>
-										<Grid item style={{}} xs={12} md={6} lg={4} xl={4} >
-											<TextField id="outlined-search" label="SKU Giriniz" type="search" variant="outlined" />
-										</Grid>
-										</Grid>
-									</Paper >
-									</div>
-									<div style={{marginTop: '20px'}}>
-										<Paper className={classes.paper}>
-											<div style={{ height: 400, width: '100%' }}>
-												<DataGrid
-													rows={rows}
-													columns={columns}
-													pageSize={5}
-													checkboxSelection
-													disableSelectionOnClick
-												/>
-											</div>
-										</Paper>
-									</div>
-								</React.Fragment>
-						</Grid>
-					<Box pt={4}>
-						<Copyright />
-					</Box>
-			  </Container>
-			</div>
-    	</div>
+		<div>
+			{/*Accordion*/}						
+			<React.Fragment>
+				<div style={{}}>
+				<Paper className={classes.paper}>
+					<Grid container>
+					<Grid item xs={12} md={6} lg={8} xl={8} style={{marginTop:'10px'}}>
+						<Title >Stok Takip Ekranı</Title>
+					</Grid>
+					<Grid item style={{}} xs={12} md={6} lg={4} xl={4} >
+						<TextField id="outlined-search" label="SKU Giriniz" type="search" variant="outlined" />
+					</Grid>
+					</Grid>
+				</Paper >
+				</div>
+				<div style={{marginTop: '20px'}}>
+					<Paper className={classes.paper}>
+						<div style={{ height: 400, width: '100%' }}>
+							<DataGrid
+								rows={rows}
+								columns={columns}
+								pageSize={5}
+								checkboxSelection
+								disableSelectionOnClick
+							/>
+						</div>
+					</Paper>
+				</div>
+			</React.Fragment>
+			<Box pt={4}>
+				<Copyright />
+			</Box>
+		</div>
 	);
 }
 

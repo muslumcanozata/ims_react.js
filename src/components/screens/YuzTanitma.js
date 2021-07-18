@@ -4,7 +4,7 @@ import LoginContext from '../../contexts/login/loginContext'
 import Sidebar from '../menus/Sidebar';
 import Header from '../menus/Header';
 import Loading from '../loading/Loading'
-import YuzTanitmaForm from '../papers/YuzTanitmaForm';
+import YuzTanitmaForm from '../papers/tanima/YuzTanitmaForm';
 //MaterialUI
 import { makeStyles } from '@material-ui/core/styles';
 
