@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import { Redirect } from "react-router-dom";
 import LoginContext from '../../contexts/login/loginContext'
-import HomePage from "../homePage";
+import HomePage from "../homepage";
 import Sidebar from '../menus/Sidebar';
 import Header from '../menus/Header';
 import Loading from '../loading/Loading'
@@ -97,6 +97,7 @@ const Dashboard = () => {
 
 	useEffect(( ) => {
 		didMount();
+		// eslint-disable-next-line
 	}, [])
 
 	if(loading) return <Loading/>

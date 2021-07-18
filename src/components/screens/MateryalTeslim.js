@@ -90,6 +90,7 @@ const MateryalTeslim = () => {
 
 	useEffect(( ) => {
 		didMount();
+		// eslint-disable-next-line
 	}, [])
 
 

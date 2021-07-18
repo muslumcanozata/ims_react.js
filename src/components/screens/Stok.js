@@ -7,8 +7,6 @@ import StokTakip from '../papers/stokTakip/StokTakip';
 // MaterialUI
 import { makeStyles } from '@material-ui/core/styles';
 
-const drawerWidth = 240;
-
 const useStyles = makeStyles((theme) => ({
 	root: {
 		display: 'flex',
@@ -23,6 +21,7 @@ const Stok = () => {
 
 	useEffect(( ) => {
 		didMount();
+		// eslint-disable-next-line
 	}, [])
 
 

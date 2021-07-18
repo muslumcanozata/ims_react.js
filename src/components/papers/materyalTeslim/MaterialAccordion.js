@@ -1,28 +1,14 @@
-import React, { useContext,useState } from "react";
-import { useHistory } from "react-router-dom";
-import Copyright from "../../Copyright";
-import Title from "../../Title"
+import React from "react";
 // MaterialUI
 import { makeStyles } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
-import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
-import Popover from '@material-ui/core/Popover';
-import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
-import TextField from '@material-ui/core/TextField';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Divider from '@material-ui/core/Divider';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
+
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -44,9 +30,6 @@ const useStyles = makeStyles((theme) => ({
 
 const MaterialAccordion = () => {
 	const classes = useStyles();
-
-	const [data, setData] = useState({});
-
 
     return (
         <React.Fragment>

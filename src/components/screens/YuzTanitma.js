@@ -91,12 +91,13 @@ const useStyles = makeStyles((theme) => ({
 
 
 const YuzTanitma = () => {
-  	const { isLogin, loading } = useContext(LoginContext)
+  	const { isLogin, loading, didMount } = useContext(LoginContext)
 
 	const classes = useStyles();
 
 	useEffect(( ) => {
-		// didMount();
+		didMount();
+		// eslint-disable-next-line
 	}, [])
 
 	if(loading) return <Loading/>

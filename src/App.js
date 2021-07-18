@@ -15,6 +15,7 @@ const App = () => {
 
 	useEffect(( ) => {
 		didMount();
+		// eslint-disable-next-line
 	}, [])
 
 	return (

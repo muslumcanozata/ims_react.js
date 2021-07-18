@@ -90,6 +90,7 @@ const UrunTeslimPage = () => {
 
 	useEffect(( ) => {
 		didMount();
+		// eslint-disable-next-line
 	}, [])
 
 

@@ -7,6 +7,7 @@ const Home = () => {
 
 	useEffect(( ) => {
 		didMount()
+		// eslint-disable-next-line
 	}, [])
 
   	return (

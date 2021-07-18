@@ -126,13 +126,13 @@ const RFIDState = (props) => {
 		event.preventDefault();
 		setLoading(true)
 
-		let one =`http://localhost:8000/api/urunTeslim/?format=json&isno=${state.isno}`
-		let two = `http://localhost:8000/api/istihkakgrup/${state.grup}`
-		let three =`http://localhost:8000/api/mudurluk/${state.mudurluk}`
+		// let one =`http://localhost:8000/api/urunTeslim/?format=json&isno=${state.isno}`
+		// let two = `http://localhost:8000/api/istihkakgrup/${state.grup}`
+		// let three =`http://localhost:8000/api/mudurluk/${state.mudurluk}`
 
-		const requestOne = axios.get(one);
-		const requestTwo = axios.get(two);
-		const requestThree = axios.get(three);
+		// const requestOne = axios.get(one);
+		// const requestTwo = axios.get(two);
+		// const requestThree = axios.get(three);
 
 		setTimeout(() => {
 			axios

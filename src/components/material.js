@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 import Copyright from "./Copyright";
 // MaterialUI
 import { makeStyles } from '@material-ui/core/styles';
@@ -7,7 +7,6 @@ import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import RFIDContext from "../contexts/rfid/rfidContext";
 import MaterialTitle from "./papers/materyalTeslim/MaterialTitle";
 import MaterialAccordion from "./papers/materyalTeslim/MaterialAccordion";
 

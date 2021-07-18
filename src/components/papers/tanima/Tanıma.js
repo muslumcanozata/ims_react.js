@@ -51,7 +51,8 @@ const Tanıma = () => {
 	const history = useHistory();
 
 	const { rfid, qr, handleIDin, handleRFin, handleQRin, handleRFChange } = useContext(RFIDContext)
-
+	
+	// eslint-disable-next-line
 	const [QRChange, setQRChange] = useState('')
 
 	function handleRegEx(event, data){
