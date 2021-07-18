@@ -1,5 +1,7 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 import Copyright from "./Copyright";
+import StokTakipTitle from "./papers/stokTakip/StokTakipTitle"
+import StokTakipDataGrid from "./papers/stokTakip/stokTakipDataGrid"
 // MaterialUI
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -35,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const stokTakip = () => {
+const StokTakip = () => {
 	const classes = useStyles();
 
   	return (
@@ -51,10 +53,10 @@ const stokTakip = () => {
                                 <StokTakipTitle/>
 							</Paper>
 						</Grid>
-						{/* Alınabilecek Ürünler */}
+						{/* Data Grid */}
 						<Grid item xs={12} md={12} lg={12}>
 							<Paper className={classes.paper}>
-
+								<StokTakipDataGrid/>
 							</Paper>
 						</Grid>
 						{/* Sepet */}
@@ -73,4 +75,4 @@ const stokTakip = () => {
 	);
 };
 
-export default stokTakip;
+export default StokTakip;
