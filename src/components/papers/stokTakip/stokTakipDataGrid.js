@@ -4,14 +4,14 @@ import { DataGrid } from '@material-ui/data-grid';
 
 const StokTakipDataGrid = () => {
 	const columns = [
-		{ field: 'id', headerName: 'ID', width: 70 },
-		{ field: 'SKU', headerName: 'SKU', width: 130 },
-		{ field: 'stokAdet', headerName: 'Stok Adedi', width: 160 },
+		{ field: 'id', headerName: 'ID', flex: 0.2 },
+		{ field: 'SKU', headerName: 'SKU', flex: 1 },
+		{ field: 'stokAdet', headerName: 'Stok Adedi', flex: 1 },
 		{
 			field: 'urunAdi',
 			headerName: 'Ürün Adı',
 			description: 'This column has a value getter and is not sortable.',
-			width: 160,
+			flex: 1,
 		},
 	];
 
@@ -37,6 +37,7 @@ const StokTakipDataGrid = () => {
                             pageSize={5}
                             checkboxSelection
                             disableSelectionOnClick
+							autoHeight={true}
                         />
                     </div>
             </div>

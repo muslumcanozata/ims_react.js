@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const HomePage = () => {
+const Homepage = () => {
 
 	const classes = useStyles();
 	const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
@@ -71,4 +71,4 @@ const HomePage = () => {
 	);
 };
 
-export default HomePage;
+export default Homepage;

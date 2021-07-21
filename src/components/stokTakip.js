@@ -3,6 +3,7 @@ import Copyright from "./Copyright";
 import StokTakipTitle from "./papers/stokTakip/StokTakipTitle"
 import StokTakipDataGrid from "./papers/stokTakip/stokTakipDataGrid"
 // MaterialUI
+import { styled } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Box from '@material-ui/core/Box';
@@ -11,15 +12,23 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 
 
+const Item = styled(Paper)(({ theme }) => ({
+	...theme.typography.body2,
+	padding: theme.spacing(2),
+	color: theme.palette.text.secondary,
+	width: '1200px',
+	maxWidth: 'calc(100% - 20px)'
+  }));
+
 const useStyles = makeStyles((theme) => ({
 	root: {
-		display: 'flex',
+		// display: 'flex',
 	},
 	appBarSpacer: theme.mixins.toolbar,
 	content: {
-		flexGrow: 1,
-		height: '100vh',
-		overflow: 'auto',
+		// flexGrow: 1,
+		// height: '100vh',
+		// overflow: 'auto',
 	},
 	container: {
 		paddingTop: theme.spacing(4),
@@ -27,12 +36,12 @@ const useStyles = makeStyles((theme) => ({
 	},
 	paper: {
 		padding: theme.spacing(2),
-		display: 'flex',
-		overflow: 'auto',
-		flexDirection: 'column',
+		// display: 'flex',
+		// overflow: 'auto',
+		// flexDirection: 'column',
 	},
 	fixedHeight: {
-		height: '%100',
+		// height: '%100',
 	},
 }));
 
@@ -45,27 +54,23 @@ const StokTakip = () => {
 			<CssBaseline />
 			<main className={classes.content}>
 			  	<div className={classes.appBarSpacer} />
-			  	<Container maxWidth="lg" className={classes.container}>
+			  	<Container className={classes.container}>
+					<Box sx={{ flexGrow: 1 }}>
 					<Grid container spacing={3}>
 						{/* StokTakip Title */}
-						<Grid item xs={12} md={12} lg={12}>
-							<Paper className={classes.paper}>
+						<Grid item xs={12}>
+							<Item>
                                 <StokTakipTitle/>
-							</Paper>
+							</Item>
 						</Grid>
 						{/* Data Grid */}
-						<Grid item xs={12} md={12} lg={12}>
-							<Paper className={classes.paper}>
+						<Grid item xs={12}>
+							<Item align="center">
 								<StokTakipDataGrid/>
-							</Paper>
-						</Grid>
-						{/* Sepet */}
-						<Grid item xs={12} md={12} lg={12}>
-							<Paper className={classes.paper}>
-
-							</Paper>
+							</Item>
 						</Grid>
 					</Grid>
+					</Box>
 					<Box pt={4}>
 						<Copyright />
 					</Box>
